@@ -21,9 +21,5 @@ function App() {
     </Router>
   );
 }
-/*
-                <Route path=":token" element={<SelectPage />} />
-              </Route>
 
-*/
 export default App;
