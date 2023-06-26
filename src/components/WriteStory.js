@@ -22,8 +22,20 @@ function WriteStory() {
     setDisplayText(displayText + '\n\n' + inputText);
     setInputText("")
   };*/
-  const begin_promp = "Play a story telling game with a kid 7 years ago. Make a 2 sentences story using 7 years old langues for a knight named Rex riding his horse."
-  const continue_promp = "\n Continue the story as a 7 years old kid for 2 sentences, small story progress."
+
+  ```
+  It should be written in a style appropriate for your intended audience (e.g., children, young adults, or general adult readers). Please also consider incorporating elements such as symbolism, metaphor , or imagery to enhance the story's impact on the reader.
+  ```
+
+  const prompt_settings = "You are a 7-year-old kid who is good at writing and telling stories. Play a collaborative writing game with a same-age kid.";
+  const style_requirement = "1. Write a Harry Potter-style story in a creative and funny way. Please also consider incorporating elements such as symbolism, metaphor , or imagery to enhance the story's impact on the reader.";
+  const length_requirement = "2. Every time, you can write at most 2-3 sentences to continue the story."
+  const purpose_requirement = "3. Your answer should use 7-year-old age vocabulary. It should be written in a style appropriate for the other kid and try to improve the other kid's reading and writing to the next level."
+  const user_customized_beginnings = "Beginning of the story: a knight named Rox is riding a house to a castle";
+  
+  const begin_prompt = prompt_settings + style_requirement + length_requirement + purpose_requirement + user_customized_beginnings
+  
+  const continue_prompt = "\n Continue collaborating with the user to advance the story, adding creative and humorous details that enhance the story's enjoyment and encourage its continuation. The user's continue the story as: "
 
   const handleAPIRequest = async (prompt) => {
     try {
@@ -69,9 +81,9 @@ function WriteStory() {
     if (inputText != '') {
       res = appendToDisplay(res, inputText)
       console.log("res: ", res)
-      prompt = res + continue_promp
+      prompt = res + continue_prompt
     } else {
-      prompt = begin_promp;
+      prompt = begin_prompt;
     }
     const apiResponse = await handleAPIRequest(prompt);
     if (apiResponse !== '') {
