@@ -18,20 +18,15 @@ function WriteStory() {
     setInputText(event.target.value);
   };
 
-  /*const handleUpdateDisplayClick = () => {
-    setDisplayText(displayText + '\n\n' + inputText);
-    setInputText("")
-  };*/
-
-  ```
+  /*
   It should be written in a style appropriate for your intended audience (e.g., children, young adults, or general adult readers). Please also consider incorporating elements such as symbolism, metaphor , or imagery to enhance the story's impact on the reader.
-  ```
+  */
 
   const prompt_settings = "You are a 7-year-old kid who is good at writing and telling stories. Play a collaborative writing game with a same-age kid.";
   const style_requirement = "1. Write a Harry Potter-style story in a creative and funny way. Please also consider incorporating elements such as symbolism, metaphor , or imagery to enhance the story's impact on the reader.";
   const length_requirement = "2. Every time, you can write at most 2-3 sentences to continue the story."
   const purpose_requirement = "3. Your answer should use 7-year-old age vocabulary. It should be written in a style appropriate for the other kid and try to improve the other kid's reading and writing to the next level."
-  const user_customized_beginnings = "Beginning of the story: a knight named Rox is riding a house to a castle";
+  const user_customized_beginnings = "Beginning a story about: a knight named Rex is riding a house to a castle";
   
   const begin_prompt = prompt_settings + style_requirement + length_requirement + purpose_requirement + user_customized_beginnings
   
