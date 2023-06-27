@@ -7,7 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 `docker build -f Dockerfile -t childrensbook .`
 
 2. Run container and start app
-`docker run -it -p 4000:3000 client`
+`docker run -it -p 4000:3000 childrensbook`
 
 3. Access to browser and test
 `http://localhost:4000/`

@@ -24,14 +24,15 @@ function WriteStory() {
   const length_requirement= "Everytime write 2-3 sentences that continue the story in a creative and funny way based on the user's input. Don't repeat user's input.\n";
   const style_requirement = "Let's play a collaborative writing game where we write an adventurous story together! You can use symbolism, metaphor, or imagery to make the story more interesting. \n"
   const purpose_requirement = "Remember to use age-appropriate vocabulary and correct punctuation and capitalization. Make sure the storyline is consistent and follow the kid's input. \n Avoid making big progress in the story and focus on giving more details. \n Let's see where our imaginations take us!"
-  const beginnings = "Beginning of the story: A knight named Rex is riding a horse to a castle.";
+  const consistent_requirement = "Continue the story user wrote."
+  const beginnings = "A knight named Rex is riding a horse to a castle.";
 
-  const system_prompt = prompt_settings + style_requirement + length_requirement + purpose_requirement
+  const system_prompt = prompt_settings + style_requirement + length_requirement + purpose_requirement + consistent_requirement;
   
-  const handleAPIRequest = async () => {
+  const handleAPIRequest = async (msgs) => {
     try {
       setIsLoading(true);
-      console.log("[handleAPIRequest] req", token, messages);
+      console.log("[handleAPIRequest] req", token, msgs);
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
@@ -40,7 +41,7 @@ function WriteStory() {
         },
         body: JSON.stringify({
           "model": "gpt-3.5-turbo",
-          "messages": messages,
+          "messages": msgs,
           "temperature": 0.7,
           "top_p": 1,
           "frequency_penalty": 0.1,
@@ -84,7 +85,7 @@ function WriteStory() {
           role: 'user',
           content: inputText,
       }
-      setMessages((prevMessages) => [...prevMessages, userRoleMessage]);
+      msgs = [...msgs, userRoleMessage];
     } else if (displayText == '') {
       const systemRoleMessage = {
         role: 'system',
@@ -94,13 +95,15 @@ function WriteStory() {
         role: 'user',
         content: beginnings,
       }
-      setMessages([systemRoleMessage, userBeginMessage]);      
+      res = appendToDisplay(res, beginnings);
+      msgs = [systemRoleMessage, userBeginMessage]
     }
-    const apiResponse = await handleAPIRequest();
+    const apiResponse = await handleAPIRequest(msgs);
     if (apiResponse !== '') {
-      setMessages((prevMessages) => [...prevMessages, apiResponse]);  
+      msgs = [...msgs, apiResponse];
       res = appendToDisplay(res, apiResponse.content)
     }
+    setMessages(msgs)
   };
 
   const handleClearDisplayClick = () => {
