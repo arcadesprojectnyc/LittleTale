@@ -1,12 +1,35 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import { UserContext } from './UserContext';
 
+
 function WriteStory() {
   const { token, char_type, char_name, where_is_char } = useContext(UserContext);
   const [inputText, setInputText] = useState('');
   const [displayText, setDisplayText] = useState('');
   const displayTextRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [messages, setMessages] = useState([]); // Keep updating messages
+  
+
+  /* Create Basic Prompt 
+  system prompt - Ask the model to adopt a persona 
+  user prompt - Initial customer user based on the previous page 
+  See example - https://platform.openai.com/docs/guides/gpt/chat-completions-api
+  */ 
+  const prompt_settings = "You are a 7-year-old kid who is good at writing and telling stories. Play a collaborative writing game with a same-age kid.";
+  const style_requirement = "1. Write a Harry Potter-style story in a creative and funny way. Please also consider incorporating elements such as symbolism, metaphor , or imagery to enhance the story's impact on the reader.";
+  const length_requirement = "2. Every time, you can write at most 250 words to continue the story.";
+  const purpose_requirement = "3. Your answer should use 7-year-old age vocabulary. It should be written in a style appropriate for the other kid and try to improve the other kid's reading and writing to the next level.";
+
+  const system_prompt = prompt_settings + style_requirement + length_requirement + purpose_requirement;
+  const user_customized_beginnings = "Beginning of the story: a knight named Rox is riding a house to a castle"
+  
+  // TODO: how to convert this as the default message to begin with?
+  // "messages": [
+    
+  //   { "role": "system", "content": system_prompt}, // Give the model a persona 
+  //   { "role": "user", "content": user_customized_beginnings}, // 
+  // ],
 
   useEffect(() => {
     if (displayTextRef.current) {
@@ -23,21 +46,10 @@ function WriteStory() {
     setInputText("")
   };*/
 
-  ```
-  It should be written in a style appropriate for your intended audience (e.g., children, young adults, or general adult readers). Please also consider incorporating elements such as symbolism, metaphor , or imagery to enhance the story's impact on the reader.
-  ```
+  const handleAPIRequest = async (new_message) => {
+    // TODO: How to append the new message to the old messages?
+    // setMessages([...messages, new_message]); // Update messages
 
-  const prompt_settings = "You are a 7-year-old kid who is good at writing and telling stories. Play a collaborative writing game with a same-age kid.";
-  const style_requirement = "1. Write a Harry Potter-style story in a creative and funny way. Please also consider incorporating elements such as symbolism, metaphor , or imagery to enhance the story's impact on the reader.";
-  const length_requirement = "2. Every time, you can write at most 2-3 sentences to continue the story."
-  const purpose_requirement = "3. Your answer should use 7-year-old age vocabulary. It should be written in a style appropriate for the other kid and try to improve the other kid's reading and writing to the next level."
-  const user_customized_beginnings = "Beginning of the story: a knight named Rox is riding a house to a castle";
-  
-  const begin_prompt = prompt_settings + style_requirement + length_requirement + purpose_requirement + user_customized_beginnings
-  
-  const continue_prompt = "\n Continue collaborating with the user to advance the story, adding creative and humorous details that enhance the story's enjoyment and encourage its continuation. The user's continue the story as: "
-
-  const handleAPIRequest = async (prompt) => {
     try {
       setIsLoading(true);
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -48,15 +60,16 @@ function WriteStory() {
         },
         body: JSON.stringify({
           "model": "gpt-3.5-turbo",
-          "messages": [{ "role": "user", "content": prompt }],
+          "messages": ,// TODO: Put updated messages here,
           "temperature": 0.7
         }),
       });
 
       const data = await response.json();
-      console.log("api returned data: ", token, prompt)
+      console.log("api returned data: ", token, new_message)
       setIsLoading(false);
-      return data.choices[0].message.content;
+     
+      return data.choices[0].message; // return both content and role
     } catch (error) {
       setIsLoading(false);
       console.error('Error:', error);
@@ -68,7 +81,7 @@ function WriteStory() {
     if (res != '') {
       res = res + '\n\n';
     }
-    res = res + msg;
+    res = res + msg.content;
     setDisplayText(res);
     setInputText("");
 
@@ -76,16 +89,16 @@ function WriteStory() {
   }
 
   const handleUpdateDisplayClick = async () => {
-    let prompt = ''
-    let res = displayText;
+    let new_message = ''
+    let res = displayText; // Old text
+    // If user input new messages, we need to append it to the original prompt 
+    // then set up the message rowl as "user"
     if (inputText != '') {
-      res = appendToDisplay(res, inputText)
-      console.log("res: ", res)
-      prompt = res + continue_prompt
-    } else {
-      prompt = begin_prompt;
-    }
-    const apiResponse = await handleAPIRequest(prompt);
+      content = appendToDisplay(res, inputText) // Append user's input to display
+      console.log("res: ", content) // Log to the system
+      new_message = {"role": "user", "content": inputText} // Append user's input to the prompt, TODO: how to separate user's input vs. assistance's
+    } 
+    const apiResponse = await handleAPIRequest(new_message); // Update new messages
     if (apiResponse !== '') {
       res = appendToDisplay(res, apiResponse)
     }
