@@ -27,10 +27,11 @@ function WriteStory() {
   const length_requirement = "2. Every time, you can write at most 2-3 sentences to continue the story."
   const purpose_requirement = "3. Your answer should use 7-year-old age vocabulary. It should be written in a style appropriate for the other kid and try to improve the other kid's reading and writing to the next level."
   const user_customized_beginnings = "Beginning a story about: a knight named Rex is riding a house to a castle";
-  
+  const continue_requirement = "Continue collaborating with the user to advance the story, adding creative and humorous details that enhance the story's enjoyment and encourage its continuation."
+
   const begin_prompt = prompt_settings + style_requirement + length_requirement + purpose_requirement + user_customized_beginnings
   
-  const continue_prompt = "\n Continue collaborating with the user to advance the story, adding creative and humorous details that enhance the story's enjoyment and encourage its continuation. The user's continue the story as: "
+  const continue_prompt = prompt_settings + style_requirement + length_requirement + purpose_requirement + continue_requirement + "Current Story is: "
 
   const handleAPIRequest = async (prompt) => {
     try {
@@ -76,7 +77,7 @@ function WriteStory() {
     if (inputText != '') {
       res = appendToDisplay(res, inputText)
       console.log("res: ", res)
-      prompt = res + continue_prompt
+      prompt =  continue_prompt + res
     } else {
       prompt = begin_prompt;
     }

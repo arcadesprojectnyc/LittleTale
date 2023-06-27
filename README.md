@@ -2,6 +2,16 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Docker Support
+1. Build docker image
+`docker build -f Dockerfile -t childrensbook .`
+
+2. Run container and start app
+`docker run -it -p 4000:3000 client`
+
+3. Access to browser and test
+`http://localhost:4000/`
+
 ## Available Scripts
 
 In the project directory, you can run:
