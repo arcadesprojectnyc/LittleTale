@@ -23,18 +23,19 @@ function WriteStory() {
   It should be written in a style appropriate for your intended audience (e.g., children, young adults, or general adult readers). Please also consider incorporating elements such as symbolism, metaphor , or imagery to enhance the story's impact on the reader.
   */
 
-  const prompt_settings = "You are a 7-year-old kid who is good at writing and telling stories. Play a collaborative writing game with a same-age kid.";
+  const prompt_settings = "You are a 7-year-old kid who is good at writing and telling stories. Play a collaborative writing game with user.";
   const style_requirement = "1. Write a Harry Potter-style story in a creative and funny way. Please also consider incorporating elements such as symbolism, metaphor , or imagery to enhance the story's impact on the reader.";
   const length_requirement = "2. Every time, you can write at most 2-3 sentences to continue the story."
   const purpose_requirement = "3. Your answer should use 7-year-old age vocabulary. It should be written in a style appropriate for the other kid and try to improve the other kid's reading and writing to the next level."
-  const beginnings = "A knight named Rex is riding a house to a castle";
+  const consistent_requirement = "4. Continue the story user wrote."
+  const beginnings = "A knight named Rex is riding a house to a castle.";
 
-  const system_prompt = prompt_settings + style_requirement + length_requirement + purpose_requirement
+  const system_prompt = prompt_settings + style_requirement + length_requirement + purpose_requirement + consistent_requirement;
   
-  const handleAPIRequest = async () => {
+  const handleAPIRequest = async (msgs) => {
     try {
       setIsLoading(true);
-      console.log("[handleAPIRequest] req", token, messages);
+      console.log("[handleAPIRequest] req", token, msgs);
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
@@ -43,7 +44,7 @@ function WriteStory() {
         },
         body: JSON.stringify({
           "model": "gpt-3.5-turbo",
-          "messages": messages,
+          "messages": msgs,
           "temperature": 0.7,
           "top_p": 1,
           "frequency_penalty": 0.05,
@@ -87,7 +88,7 @@ function WriteStory() {
           role: 'user',
           content: inputText,
       }
-      setMessages((prevMessages) => [...prevMessages, userRoleMessage]);
+      msgs = [...msgs, userRoleMessage];
     } else if (displayText == '') {
       const systemRoleMessage = {
         role: 'system',
@@ -97,13 +98,15 @@ function WriteStory() {
         role: 'user',
         content: beginnings,
       }
-      setMessages([systemRoleMessage, userBeginMessage]);      
+      res = appendToDisplay(res, beginnings);
+      msgs = [systemRoleMessage, userBeginMessage]
     }
-    const apiResponse = await handleAPIRequest();
+    const apiResponse = await handleAPIRequest(msgs);
     if (apiResponse !== '') {
-      setMessages((prevMessages) => [...prevMessages, apiResponse]);  
+      msgs = [...msgs, apiResponse];
       res = appendToDisplay(res, apiResponse.content)
     }
+    setMessages(msgs)
   };
 
   const handleClearDisplayClick = () => {
