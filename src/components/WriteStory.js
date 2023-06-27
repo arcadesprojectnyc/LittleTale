@@ -7,6 +7,7 @@ function WriteStory() {
   const [displayText, setDisplayText] = useState('');
   const displayTextRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     if (displayTextRef.current) {
@@ -26,16 +27,14 @@ function WriteStory() {
   const style_requirement = "1. Write a Harry Potter-style story in a creative and funny way. Please also consider incorporating elements such as symbolism, metaphor , or imagery to enhance the story's impact on the reader.";
   const length_requirement = "2. Every time, you can write at most 2-3 sentences to continue the story."
   const purpose_requirement = "3. Your answer should use 7-year-old age vocabulary. It should be written in a style appropriate for the other kid and try to improve the other kid's reading and writing to the next level."
-  const user_customized_beginnings = "Beginning a story about: a knight named Rex is riding a house to a castle";
-  const continue_requirement = "Continue collaborating with the user to advance the story, adding creative and humorous details that enhance the story's enjoyment and encourage its continuation."
+  const beginnings = "A knight named Rex is riding a house to a castle";
 
-  const begin_prompt = prompt_settings + style_requirement + length_requirement + purpose_requirement + user_customized_beginnings
+  const system_prompt = prompt_settings + style_requirement + length_requirement + purpose_requirement
   
-  const continue_prompt = prompt_settings + style_requirement + length_requirement + purpose_requirement + continue_requirement + "Current Story is: "
-
-  const handleAPIRequest = async (prompt) => {
+  const handleAPIRequest = async () => {
     try {
       setIsLoading(true);
+      console.log("[handleAPIRequest] req", token, messages);
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
@@ -44,15 +43,21 @@ function WriteStory() {
         },
         body: JSON.stringify({
           "model": "gpt-3.5-turbo",
-          "messages": [{ "role": "user", "content": prompt }],
-          "temperature": 0.7
+          "messages": messages,
+          "temperature": 0.7,
+          "top_p": 1,
+          "frequency_penalty": 0.05,
         }),
       });
 
       const data = await response.json();
-      console.log("api returned data: ", token, prompt)
+      if (data !== null) {
+        console.log("[handleAPIRequest] resp", data.choices[0]);
+      } else {
+        console.log("GPT didn't response back!");
+      }
       setIsLoading(false);
-      return data.choices[0].message.content;
+      return data.choices[0].message;
     } catch (error) {
       setIsLoading(false);
       console.error('Error:', error);
@@ -74,21 +79,36 @@ function WriteStory() {
   const handleUpdateDisplayClick = async () => {
     let prompt = ''
     let res = displayText;
-    if (inputText != '') {
+    let msgs = messages;
+    if (displayText != '' && inputText != '') {
       res = appendToDisplay(res, inputText)
       console.log("res: ", res)
-      prompt =  continue_prompt + res
-    } else {
-      prompt = begin_prompt;
+      const userRoleMessage = {
+          role: 'user',
+          content: inputText,
+      }
+      setMessages((prevMessages) => [...prevMessages, userRoleMessage]);
+    } else if (displayText == '') {
+      const systemRoleMessage = {
+        role: 'system',
+        content: system_prompt,
+      };
+      const userBeginMessage = {
+        role: 'user',
+        content: beginnings,
+      }
+      setMessages([systemRoleMessage, userBeginMessage]);      
     }
-    const apiResponse = await handleAPIRequest(prompt);
+    const apiResponse = await handleAPIRequest();
     if (apiResponse !== '') {
-      res = appendToDisplay(res, apiResponse)
+      setMessages((prevMessages) => [...prevMessages, apiResponse]);  
+      res = appendToDisplay(res, apiResponse.content)
     }
   };
 
   const handleClearDisplayClick = () => {
     setDisplayText("");
+    setMessages([])
   };
 
   return (
