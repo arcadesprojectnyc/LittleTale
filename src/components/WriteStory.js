@@ -19,15 +19,12 @@ function WriteStory() {
     setInputText(event.target.value);
   };
 
-  /*
-  It should be written in a style appropriate for your intended audience (e.g., children, young adults, or general adult readers). Please also consider incorporating elements such as symbolism, metaphor , or imagery to enhance the story's impact on the reader.
-  */
 
-  const prompt_settings = "You are a 7-year-old kid who is good at writing and telling stories. Play a collaborative writing game with a same-age kid.";
-  const style_requirement = "1. Write a Harry Potter-style story in a creative and funny way. Please also consider incorporating elements such as symbolism, metaphor , or imagery to enhance the story's impact on the reader.";
-  const length_requirement = "2. Every time, you can write at most 2-3 sentences to continue the story."
-  const purpose_requirement = "3. Your answer should use 7-year-old age vocabulary. It should be written in a style appropriate for the other kid and try to improve the other kid's reading and writing to the next level."
-  const beginnings = "A knight named Rex is riding a house to a castle";
+  const prompt_settings = "Act as a creative writing teacher who wants to help a 7-year-old student improve their reading and writing skills.";
+  const length_requirement= "Everytime write 2-3 sentences that continue the story in a creative and funny way based on the user's input. Don't repeat user's input.\n";
+  const style_requirement = "Let's play a collaborative writing game where we write an adventurous story together! You can use symbolism, metaphor, or imagery to make the story more interesting. \n"
+  const purpose_requirement = "Remember to use age-appropriate vocabulary and correct punctuation and capitalization. Make sure the storyline is consistent and follow the kid's input. \n Avoid making big progress in the story and focus on giving more details. \n Let's see where our imaginations take us!"
+  const beginnings = "Beginning of the story: A knight named Rex is riding a horse to a castle.";
 
   const system_prompt = prompt_settings + style_requirement + length_requirement + purpose_requirement
   
@@ -46,7 +43,7 @@ function WriteStory() {
           "messages": messages,
           "temperature": 0.7,
           "top_p": 1,
-          "frequency_penalty": 0.05,
+          "frequency_penalty": 0.1,
         }),
       });
 
