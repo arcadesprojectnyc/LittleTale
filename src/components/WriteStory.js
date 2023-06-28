@@ -4,31 +4,41 @@ import { UserContext } from './UserContext';
 function WriteStory() {
   const { token, char_type, char_name, where_is_char } = useContext(UserContext);
   const [inputText, setInputText] = useState('');
-  const [displayText, setDisplayText] = useState('');
-  const displayTextRef = useRef(null);
+  const messageContainerRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    if (displayTextRef.current) {
-      displayTextRef.current.scrollTop = displayTextRef.current.scrollHeight;
+    if (messageContainerRef.current) {
+      messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
     }
-  }, [displayText]);
+  }, [messages]);
 
   const handleInputChange = (event) => {
     setInputText(event.target.value);
   };
 
+  const handleMessageRole = (role) => {
+    if (role === 'user') {
+      return 'user-message';
+    } else if (role === 'assistant') {
+      return 'assistant-message';
+    } else if (role === 'system') {
+      return 'system-message';
+    } else {
+      return '';
+    }
+  };
 
   const prompt_settings = "Act as a creative writing teacher who wants to help a 7-year-old student improve their reading and writing skills.";
-  const length_requirement= "Everytime write 2-3 sentences that continue the story in a creative and funny way based on the user's input. Don't repeat user's input.\n";
+  const length_requirement = "Everytime write 2 sentences that continue the story in a creative and funny way based on the user's input. Don't repeat user's input.\n";
   const style_requirement = "Let's play a collaborative writing game where we write an adventurous story together! You can use symbolism, metaphor, or imagery to make the story more interesting. \n"
   const purpose_requirement = "Remember to use age-appropriate vocabulary and correct punctuation and capitalization. Make sure the storyline is consistent and follow the kid's input. \n Avoid making big progress in the story and focus on giving more details. \n Let's see where our imaginations take us!"
   const consistent_requirement = "Continue the story user wrote."
   const beginnings = "A knight named Rex is riding a horse to a castle.";
 
   const system_prompt = prompt_settings + style_requirement + length_requirement + purpose_requirement + consistent_requirement;
-  
+
   const handleAPIRequest = async (msgs) => {
     try {
       setIsLoading(true);
@@ -63,30 +73,16 @@ function WriteStory() {
     }
   }
 
-  const appendToDisplay = (res, msg) => {
-    if (res != '') {
-      res = res + '\n\n';
-    }
-    res = res + msg;
-    setDisplayText(res);
-    setInputText("");
-
-    return res
-  }
-
   const handleUpdateDisplayClick = async () => {
     let prompt = ''
-    let res = displayText;
     let msgs = messages;
-    if (displayText != '' && inputText != '') {
-      res = appendToDisplay(res, inputText)
-      console.log("res: ", res)
+    if (msgs.length != 0 && inputText != '') {
       const userRoleMessage = {
-          role: 'user',
-          content: inputText,
+        role: 'user',
+        content: inputText,
       }
       msgs = [...msgs, userRoleMessage];
-    } else if (displayText == '') {
+    } else if (msgs.length == 0) {
       const systemRoleMessage = {
         role: 'system',
         content: system_prompt,
@@ -95,28 +91,28 @@ function WriteStory() {
         role: 'user',
         content: beginnings,
       }
-      res = appendToDisplay(res, beginnings);
       msgs = [systemRoleMessage, userBeginMessage]
     }
+    setInputText("")
     const apiResponse = await handleAPIRequest(msgs);
     if (apiResponse !== '') {
       msgs = [...msgs, apiResponse];
-      res = appendToDisplay(res, apiResponse.content)
     }
     setMessages(msgs)
   };
 
   const handleClearDisplayClick = () => {
-    setDisplayText("");
     setMessages([])
   };
+
+  const filteredMessages = messages.filter(message => message.role !== 'system');
 
   return (
     <div>
       <div style={{ marginBottom: '20px' }}>
         <h3>Story To Be Continued</h3>
         <div
-          ref={displayTextRef}
+          ref={messageContainerRef}
           style={{
             border: '1px solid #ccc',
             marginBottom: '20px',
@@ -130,7 +126,14 @@ function WriteStory() {
             opacity: isLoading ? 0.5 : 1,
           }}
         >
-          {displayText}
+          {filteredMessages.map((message, index) => (
+            <div
+              key={index}
+              className={`message ${handleMessageRole(message.role)}`}
+            >
+              {message.content}
+            </div>
+          ))}
         </div>
       </div>
       <div style={{
