@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState } from "react";
 
 // Create the context
 export const UserContext = createContext();
@@ -9,6 +9,7 @@ export function UserProvider({ children }) {
   const [char_type, setCharType] = useState(null);
   const [char_name, setCharName] = useState(null);
   const [where_is_char, setWhereIsChar] = useState(null);
+  const [write_story_msgs, setWriteStoryMsgs] = useState(null);
 
   const setTokenValue = (token) => {
     setToken(token);
@@ -26,6 +27,10 @@ export function UserProvider({ children }) {
     setWhereIsChar(where_is_char);
   };
 
+  const setWriteStoryMsgsValue = (write_story_msgs) => {
+    setWriteStoryMsgs(write_story_msgs);
+  };
+
   // Value object to be provided to consuming components
   const value = {
     token,
@@ -36,11 +41,9 @@ export function UserProvider({ children }) {
     setCharNameCxt: setCharNameValue,
     where_is_char,
     setWhereIsCharCxt: setWhereIsCharValue,
+    write_story_msgs,
+    setWriteStoryMsgCxt: setWriteStoryMsgsValue,
   };
 
-  return (
-    <UserContext.Provider value={value}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
