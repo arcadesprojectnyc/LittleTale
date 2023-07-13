@@ -28,7 +28,7 @@ function StorySetting() {
             console.log("[Select.log] char_type: " + charactor_type +
                 ", char_name: " + charactor_name +
                 ", where: " + where_is_charactor)
-            alert(`Let's write the charactor_type, name and background first!`);
+            alert(`Let's write the charactor, name and background first!`);
         } else {
             setCharTypeCxt(charactor_type);
             setCharNameCxt(charactor_name);
@@ -40,17 +40,15 @@ function StorySetting() {
 
     return (
         <div>
-            <p style={{ fontSize: '20px' }}>What's the type of the character?</p>
+            <p style={{ fontSize: '20px' }}>What's the character?</p>
             <input type="text" value={charactor_type} onChange={handleCharactorTypeChange} />
-            <p style={{ fontSize: '20px' }}>What's the name?</p>
+            <p style={{ fontSize: '20px' }}>What's the character's name?</p>
             <input type="text" value={charactor_name} onChange={handleCharactorNameChange} />
             <p style={{ fontSize: '20px' }}>Where is the character?</p>
             <input type="text" value={where_is_charactor} onChange={handleWhereIsCharactorChange} />
             <div>
                 <button onClick={handleButtonClick}>Start Writing!!!</button>
             </div>
-            <h3>You navigated to story setting with the following token:</h3>
-            <p>{token}</p>
         </div>
     );
 }
