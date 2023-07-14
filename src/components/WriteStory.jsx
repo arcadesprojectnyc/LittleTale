@@ -16,6 +16,19 @@ function WriteStory() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const fetchData = async () => {
+      let msgs = messages;
+      if (messages.length == 2) {
+        setIsLoading(true);
+        const apiResponse = await handleAPIRequest(token, msgs);
+        setIsLoading(false);
+        if (apiResponse !== "") {
+          msgs = [...msgs, apiResponse];
+        }
+        setMessages(msgs);
+      }
+    };
+    fetchData();
     if (messageContainerRef.current) {
       messageContainerRef.current.scrollTop =
         messageContainerRef.current.scrollHeight;
@@ -23,29 +36,18 @@ function WriteStory() {
   }, [messages]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      let msgs = messages;
-      const systemRoleMessage = {
-        role: "system",
-        content: system_prompt,
-      };
-      const userBeginMessage = {
-        role: "user",
-        content: beginnings,
-      };
-      msgs = [systemRoleMessage, userBeginMessage];
-
-      setIsLoading(true);
-      const apiResponse = await handleAPIRequest(token, msgs);
-      setIsLoading(false);
-
-      if (apiResponse !== "") {
-        msgs = [...msgs, apiResponse];
-      }
-      setMessages(msgs);
+    let msgs = messages;
+    const systemRoleMessage = {
+      role: "system",
+      content: system_prompt,
     };
+    const userBeginMessage = {
+      role: "user",
+      content: beginnings,
+    };
+    msgs = [systemRoleMessage, userBeginMessage];
 
-    fetchData();
+    setMessages(msgs);
   }, []);
 
   const handleInputChange = (event) => {
@@ -133,6 +135,8 @@ function WriteStory() {
   const filteredMessages = messages.filter(
     (message) => message.role !== "system"
   );
+
+  console.log("WriteStory is rendering");
 
   return (
     <div>
