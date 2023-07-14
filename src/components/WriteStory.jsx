@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleAPIRequest, handleMessageRole } from "../utils/GPTUtils";
 import { UserContext } from "./UserContext";
+import MessagesContainer from "./MessagesContainer";
 import hint from "../images/hint.png";
 
 function WriteStory() {
@@ -29,10 +30,6 @@ function WriteStory() {
       }
     };
     fetchData();
-    if (messageContainerRef.current) {
-      messageContainerRef.current.scrollTop =
-        messageContainerRef.current.scrollHeight;
-    }
   }, [messages]);
 
   useEffect(() => {
@@ -132,40 +129,17 @@ function WriteStory() {
     setHintText([]);
   };
 
-  const filteredMessages = messages.filter(
-    (message) => message.role !== "system"
-  );
-
   console.log("WriteStory is rendering");
 
   return (
     <div>
       <div style={{ marginBottom: "20px" }}>
         <h3>Story To Be Continued</h3>
-        <div
-          ref={messageContainerRef}
-          style={{
-            border: "1px solid #ccc",
-            marginBottom: "20px",
-            height: "40vh",
-            width: "90vh",
-            padding: "10px",
-            overflow: "auto",
-            wordWrap: "break-word",
-            whiteSpace: "pre-wrap",
-            textAlign: "left",
-            opacity: isLoading ? 0.5 : 1,
-          }}
-        >
-          {filteredMessages.map((message, index) => (
-            <div
-              key={index}
-              className={`message ${handleMessageRole(message.role)}`}
-            >
-              {message.content}
-            </div>
-          ))}
-        </div>
+        <MessagesContainer
+          messages={messages}
+          height="40vh"
+          autoScroll={true}
+        />
       </div>
       <div
         style={{
