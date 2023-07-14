@@ -3,6 +3,7 @@ import { UserContext } from "./UserContext";
 import { handleAPIRequest, handleMessageRole } from "../utils/GPTUtils";
 import { useNavigate } from "react-router-dom";
 import { saveAs } from "file-saver";
+import MessagesContainer from "./MessagesContainer";
 
 function ReviewStory() {
   const { token, write_story_msgs } = useContext(UserContext);
@@ -70,6 +71,10 @@ function ReviewStory() {
     setMessages(msgs);
   };
 
+  const handleEditMsg = (index) => {
+    console.log("ReviewStory: handle edit msg: ", index);
+  };
+
   const saveToFile = () => {
     const formattedMessages = JSON.stringify(messages, null, 2);
     const blob = new Blob([formattedMessages], {
@@ -85,48 +90,36 @@ function ReviewStory() {
     );
   }
 
+  const buttons = [
+    {
+      label: "Comment",
+      onClick: handleRewriteMsg,
+    },
+    {
+      label: "Edit",
+      onClick: handleEditMsg,
+    },
+  ];
+
   return (
-    <div>
-      <h3>The Story</h3>
-      <div
-        style={{
-          border: "1px solid #ccc",
-          marginBottom: "20px",
-          height: "70vh",
-          width: "90vh",
-          padding: "10px",
-          overflow: "auto",
-          wordWrap: "break-word",
-          whiteSpace: "pre-wrap",
-          textAlign: "left",
-        }}
-      >
-        {filteredMessages.map((message, index) => (
-          <div
-            key={index}
-            className={`message ${handleMessageRole(message.role)}`}
-          >
-            {message.content}
-            {message.role === "user" && (
-              <button
-                onClick={() => {
-                  handleRewriteMsg(index);
-                }}
-                disabled={isLoading}
-              >
-                {isLoading ? "Wait" : "Rewrite"}
-              </button>
-            )}
-          </div>
-        ))}
-      </div>
+    <div style={{ display: "flex" }}>
       <div>
-        <button onClick={saveToFile} disabled={isLoading}>
-          {isLoading ? "Wait" : "Svae Story"}
-        </button>
-        <button onClick={handleStartWriting} disabled={isLoading}>
-          {isLoading ? "Wait" : "Start Writing Again"}
-        </button>
+        <h3>The Story</h3>
+        <MessagesContainer
+          messages={filteredMessages}
+          height="70vh"
+          autoScroll={false}
+          buttons={buttons}
+          isLoading={isLoading}
+        />
+        <div>
+          <button onClick={saveToFile} disabled={isLoading}>
+            {isLoading ? "Wait" : "Svae Story"}
+          </button>
+          <button onClick={handleStartWriting} disabled={isLoading}>
+            {isLoading ? "Wait" : "Start Writing Again"}
+          </button>
+        </div>
       </div>
     </div>
   );

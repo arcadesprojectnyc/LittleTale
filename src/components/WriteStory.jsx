@@ -129,8 +129,6 @@ function WriteStory() {
     setHintText([]);
   };
 
-  console.log("WriteStory is rendering");
-
   return (
     <div>
       <div style={{ marginBottom: "20px" }}>
