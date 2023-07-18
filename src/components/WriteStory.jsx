@@ -71,7 +71,8 @@ function WriteStory() {
     story_hard_requirement_4 + 
     story_length_requirement;
 
-  const beginning_prompt = user_input_beginnings + ".";  //"A " + char_type + " named " + char_name + " was " + where_is_char + ".";
+  const beginning_prompt = "A " + char_type + " named " + char_name + " was " + where_is_char + "."; //TODO: Need to replace this with 
+  user_input_beginnings + "."; 
   
   
   // Prompt for Hints
@@ -81,8 +82,6 @@ function WriteStory() {
   const hint_beginning_requirement = "Begin with 'Here are some hints to continue our story.'";
 
   const hint_prompt = hint_request + hint_hard_requirment + hint_length_requirement + hint_beginning_requirement;
-
-  
 
   const handleContinueStoryClick = async () => {
     let msgs = messages;
