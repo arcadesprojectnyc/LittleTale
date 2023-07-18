@@ -129,7 +129,7 @@ function WriteStory() {
     const apiResponse = await handleAPIRequest(token, msgs);
     setIsLoading(false);
     if (apiResponse !== null) {
-      let hintText = ["Here are 3 suggestions for you: "];
+      let hintText = [""]; // We don't need this beginning any more. gpt will give customized beginnings
       hintText = [...hintText, ...apiResponse.content.split("\n")];
       setHintText(hintText);
       console.log("got hint: ", apiResponse.content);
