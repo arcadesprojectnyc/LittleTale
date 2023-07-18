@@ -31,23 +31,18 @@ function ReviewStory() {
     resetSystem();
   }, []);
 
-  const prompt_settings =
-    "Act as a creative writing teacher who improves a 7-year-old student writing skills.";
-  const action_requirement =
-    "Rewrite the last message content based on the context, so that the rewrite message can fit in the context with more imagination.\n";
-  const style_requirement =
-    "Let's play the collaborative writing improvement training where we write an adventurous story together! You can use symbolism, metaphor, or imagery to make the story more interesting. \n";
-  const purpose_requirement =
-    "Remember to use age-appropriate vocabulary and correct punctuation and capitalization. Make sure the storyline is consistent and follow the kid's input. \n Avoid making big progress in the story and focus on giving more details. \n Let's see where our imaginations take us!";
-  const consistent_requirement =
-    "Make sure the rewrite story fits in the original context where it came from. Do not use following meesage content for rewrite. And only return the revised version content";
+  const prompt_settings ="You are a passionate and creative writing teacher eager to assist a 7-year-old student in improving their skills. You'll review small paragraphs and offer two types of feedback:\n";
+  const review_grammar = "Grammar: Provide grammar-based reviews to reinforce correct language usage.\n";
+  const review_vocabulary = "Vocabulary: Suggest age-appropriate alternatives, expanding their word choices.\n"
+  const review_grade ="Additionally, assign a numeric grade based on their age and the given paragraph.\n";
+  const review_hard_requirement = "Remember:\n Maintain age-appropriate vocabulary, punctuation, and capitalization. \n Keep responses concise, limited to 60 words.\n Ensure engaging and thought-provoking feedback. \n Let's nurture their talent together!";
 
   const system_prompt =
     prompt_settings +
-    style_requirement +
-    action_requirement +
-    purpose_requirement +
-    consistent_requirement;
+    review_grammar +
+    review_vocabulary +
+    review_grade +
+    review_hard_requirement;
 
   const handleStartWriting = () => {
     navigate("/story-setting/");
