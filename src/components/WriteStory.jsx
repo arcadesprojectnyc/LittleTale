@@ -71,8 +71,7 @@ function WriteStory() {
     story_hard_requirement_4 + 
     story_length_requirement;
 
-  const beginning_prompt = "A " + char_type + " named " + char_name + " was " + where_is_char + "."; //TODO: Need to replace this with 
-  user_input_beginnings + "."; 
+  const beginning_prompt = "A " + char_type + " named " + char_name + " was " + where_is_char + "."; //TODO: Need to replace this with user_input_beginnings + "."; 
   
   
   // Prompt for Hints
