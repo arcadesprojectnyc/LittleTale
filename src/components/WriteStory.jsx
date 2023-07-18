@@ -40,7 +40,7 @@ function WriteStory() {
     };
     const userBeginMessage = {
       role: "user",
-      content: beginnings,
+      content: beginning_prompt,
     };
     msgs = [systemRoleMessage, userBeginMessage];
 
@@ -51,26 +51,38 @@ function WriteStory() {
     setInputText(event.target.value);
   };
 
+  // Prompt for setting up the story game
   const prompt_settings =
-    "Act as a creative writing teacher who wants to help a 7-year-old student improve their reading and writing skills.";
-  const length_requirement =
-    "Everytime write 2 sentences that continue the story in a creative and funny way based on the user's input. Don't repeat user's input.\n";
-  const style_requirement =
-    "Let's play a collaborative writing game where we write an adventurous story together! You can use symbolism, metaphor, or imagery to make the story more interesting. \n";
-  const purpose_requirement =
-    "Remember to use age-appropriate vocabulary and correct punctuation and capitalization. Make sure the storyline is consistent and follow the kid's input. \n Avoid making big progress in the story and focus on giving more details. \n Let's see where our imaginations take us!";
-  const consistent_requirement = "Continue the story user wrote.";
-  const beginnings =
-    "A " + char_type + " named " + char_name + " was " + where_is_char + ".";
-  const hint_prompt =
-    "Give me 3 directions with 1 simple sentence I can potentially continue this story.";
-
+    "You are a creative writing teacher who is eager to help a 7-year-old student enhance their reading and writing skills through an exciting collaborative writing game.";
+  const story_style_requirement =
+    "The game involves both the teacher (that's you!) and the student taking turns to write an adventurous story together. Here are the rules to follow: \n";
+  const story_hard_requirement_1 ="1. Use symbolism, metaphor, and imagery to make the story captivating and engaging for the young reader.\n"
+  const story_hard_requirement_2 ="2. Maintain age-appropriate vocabulary and ensure correct punctuation and capitalization throughout the story.\n"
+  const story_hard_requirement_3 ="3. Ensure the storyline remains consistent and incorporates the kid's input in a creative and humorous manner.\n"
+  const story_hard_requirement_4 ="4. Avoid repeating the child's input. Instead, progress the story gradually while providing additional details. \n"
+  const story_length_requirement ="5. Keep your responses concise, using no more than 50 words each time.\n Let's embark on this storytelling adventure and create a magical world together!";
+  
   const system_prompt =
     prompt_settings +
-    style_requirement +
-    length_requirement +
-    purpose_requirement +
-    consistent_requirement;
+    story_style_requirement +
+    story_hard_requirement_1 +
+    story_hard_requirement_2 + 
+    story_hard_requirement_3 +
+    story_hard_requirement_4 + 
+    story_length_requirement;
+
+  const beginning_prompt = user_input_beginnings + ".";  //"A " + char_type + " named " + char_name + " was " + where_is_char + ".";
+  
+  
+  // Prompt for Hints
+  const hint_request = "I've reached a point in the game where I'm unsure how to proceed with the story. Could you please provide 3 potential directions that I can take with some guiding questions to help me explore each option further?";
+  const hint_hard_requirment = "Remember to consider the story so far and make the questions engaging and thought-provoking.  To make it more engaging and thought-provoking, please continue to use a teacher's tone.";
+  const hint_length_requirement = "Keep your responses concise, using no more than 60 words each time." ;
+  const hint_beginning_requirement = "Begin with 'Here are some hints to continue our story.'";
+
+  const hint_prompt = hint_request + hint_hard_requirment + hint_length_requirement + hint_beginning_requirement;
+
+  
 
   const handleContinueStoryClick = async () => {
     let msgs = messages;
