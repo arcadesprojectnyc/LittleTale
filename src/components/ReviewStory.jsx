@@ -1,13 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import { UserContext } from "./UserContext";
 import { handleAPIRequest, handleMessageRole } from "../utils/GPTUtils";
 import { useNavigate } from "react-router-dom";
 import { saveAs } from "file-saver";
 import MessagesContainer from "./MessagesContainer";
+import CommentsContainer from "./CommentsContainer";
 
 function ReviewStory() {
   const { token, write_story_msgs } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [jumpToMessageIndex, setJumpToMessageIndex] = useState(null);
+  const [commentMessageHeight, setCommentMessageHeight] = useState(null);
   const [messages, setMessages] = useState(write_story_msgs);
   const navigate = useNavigate();
 
@@ -73,6 +76,7 @@ function ReviewStory() {
 
   const handleEditMsg = (index) => {
     console.log("ReviewStory: handle edit msg: ", index);
+    setJumpToMessageIndex(index);
   };
 
   const saveToFile = () => {
@@ -102,24 +106,38 @@ function ReviewStory() {
   ];
 
   return (
-    <div style={{ display: "flex" }}>
-      <div>
-        <h3>The Story</h3>
+    <div
+      style={{
+        width: "90vw",
+      }}
+    >
+      <h3>The Story</h3>
+      <div
+        style={{
+          display: "flex",
+          width: "90vw",
+        }}
+      >
         <MessagesContainer
           messages={filteredMessages}
           height="70vh"
+          weight="70vw"
           autoScroll={false}
           buttons={buttons}
           isLoading={isLoading}
+          jumpToMessageIndex={jumpToMessageIndex}
+          setJumpToMessageIndex={setJumpToMessageIndex}
+          setCommentMessageHeight={setCommentMessageHeight}
         />
-        <div>
-          <button onClick={saveToFile} disabled={isLoading}>
-            {isLoading ? "Wait" : "Svae Story"}
-          </button>
-          <button onClick={handleStartWriting} disabled={isLoading}>
-            {isLoading ? "Wait" : "Start Writing Again"}
-          </button>
-        </div>
+        <CommentsContainer commentMessageHeight={commentMessageHeight} />
+      </div>
+      <div>
+        <button onClick={saveToFile} disabled={isLoading}>
+          {isLoading ? "Wait" : "Save Story"}
+        </button>
+        <button onClick={handleStartWriting} disabled={isLoading}>
+          {isLoading ? "Wait" : "Start Writing Again"}
+        </button>
       </div>
     </div>
   );

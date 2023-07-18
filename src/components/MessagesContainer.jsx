@@ -4,11 +4,16 @@ import { handleMessageRole } from "../utils/GPTUtils";
 const MessagesContainer = ({
   messages,
   height,
+  weight,
   autoScroll,
   buttons,
   isLoading,
+  jumpToMessageIndex,
+  setJumpToMessageIndex,
+  setCommentMessageHeight,
 }) => {
   const containerRef = useRef(null);
+  const messageRefs = useRef([]);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -33,6 +38,33 @@ const MessagesContainer = ({
     }
   }, [messages]);
 
+  useEffect(() => {
+    if (
+      jumpToMessageIndex !== null &&
+      setJumpToMessageIndex &&
+      messageRefs.current[jumpToMessageIndex]
+    ) {
+      messageRefs.current[jumpToMessageIndex].scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
+      if (setCommentMessageHeight) {
+        setTimeout(() => {
+          const element = messageRefs.current[jumpToMessageIndex];
+          const containerRect = containerRef.current.getBoundingClientRect();
+          if (element) {
+            const messageRect = element.getBoundingClientRect();
+            const topDiff = messageRect.top - containerRect.top;
+
+            setCommentMessageHeight(topDiff);
+          }
+        }, 500);
+      }
+      setJumpToMessageIndex(null);
+    }
+  }, [jumpToMessageIndex]);
+
   let filteredMessages = [];
   if (messages && messages.length > 0) {
     filteredMessages = messages.filter(
@@ -47,7 +79,7 @@ const MessagesContainer = ({
         border: "1px solid #ccc",
         marginBottom: "20px",
         height: height,
-        width: "90vh",
+        width: weight,
         padding: "10px",
         overflow: "auto",
         wordWrap: "break-word",
@@ -64,6 +96,7 @@ const MessagesContainer = ({
             position: "relative",
             paddingBottom: buttons ? "30px" : "0",
           }}
+          ref={(el) => (messageRefs.current[index] = el)}
         >
           {message.content}
           <div

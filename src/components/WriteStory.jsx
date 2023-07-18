@@ -130,7 +130,11 @@ function WriteStory() {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        width: "90vw",
+      }}
+    >
       <div style={{ marginBottom: "20px" }}>
         <h3>Story To Be Continued</h3>
         <MessagesContainer
