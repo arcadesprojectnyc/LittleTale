@@ -198,7 +198,7 @@ function WriteStory() {
               X
             </button>
             {hintText.map((message, index) => (
-              <p key={index} style={{ textAlign: "left" }}>
+              <p key={index} style={{ textAlign: "left", fontSize: "15px" }}>
                 {message}
               </p>
             ))}

@@ -12,6 +12,7 @@ function ReviewStory() {
   const [jumpToMessageIndex, setJumpToMessageIndex] = useState(null);
   const [commentMessageHeight, setCommentMessageHeight] = useState(null);
   const [messages, setMessages] = useState(write_story_msgs);
+  const [commentMessages, setCommentMessages] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,32 +35,28 @@ function ReviewStory() {
   const prompt_settings =
     "Act as a creative writing teacher who improves a 7-year-old student writing skills.";
   const action_requirement =
-    "Rewrite the last message content based on the context, so that the rewrite message can fit in the context with more imagination.\n";
-  const style_requirement =
-    "Let's play the collaborative writing improvement training where we write an adventurous story together! You can use symbolism, metaphor, or imagery to make the story more interesting. \n";
+    "Provide 3 writing improvement suggestions, like writing details, vocabulary and grammar.\n";
   const purpose_requirement =
-    "Remember to use age-appropriate vocabulary and correct punctuation and capitalization. Make sure the storyline is consistent and follow the kid's input. \n Avoid making big progress in the story and focus on giving more details. \n Let's see where our imaginations take us!";
-  const consistent_requirement =
-    "Make sure the rewrite story fits in the original context where it came from. Do not use following meesage content for rewrite. And only return the revised version content";
+    "Focus on the last message from user only. Only include the direct recommendation.";
 
   const system_prompt =
-    prompt_settings +
-    style_requirement +
-    action_requirement +
-    purpose_requirement +
-    consistent_requirement;
+    prompt_settings + action_requirement + purpose_requirement;
 
   const handleStartWriting = () => {
     navigate("/story-setting/");
   };
 
-  const handleRewriteMsg = async (index) => {
-    console.log("handleCorrectMsg:", index);
-    let ctn = "Rewrite: " + write_story_msgs[index + 1].content;
+  const handleMsgRecommendation = async (index) => {
+    console.log("ReviewStory: handle edit msg: ", index);
+    setCommentMessages([]);
+    setJumpToMessageIndex(index);
+
     let msgs = messages;
     const userRoleMessage = {
       role: "user",
-      content: ctn,
+      content:
+        //"Provide 3 grammar and vocabulary improvement suggestions: " +
+        write_story_msgs[index + 1].content,
     };
     msgs = [...msgs, userRoleMessage];
     setIsLoading(true);
@@ -68,16 +65,12 @@ function ReviewStory() {
     if (apiResponse !== "") {
       msgs = [...msgs, apiResponse];
       // The index passed in with no system msg, so plus 1 back
-      msgs[index + 1] = apiResponse;
-      console.log(msgs);
+      setCommentMessages(apiResponse.content.split("\n"));
     }
     setMessages(msgs);
   };
 
-  const handleEditMsg = (index) => {
-    console.log("ReviewStory: handle edit msg: ", index);
-    setJumpToMessageIndex(index);
-  };
+  const handleEditMsg = (index) => {};
 
   const saveToFile = () => {
     const formattedMessages = JSON.stringify(messages, null, 2);
@@ -96,8 +89,8 @@ function ReviewStory() {
 
   const buttons = [
     {
-      label: "Comment",
-      onClick: handleRewriteMsg,
+      label: "Recommendation",
+      onClick: handleMsgRecommendation,
     },
     {
       label: "Edit",
@@ -129,7 +122,10 @@ function ReviewStory() {
           setJumpToMessageIndex={setJumpToMessageIndex}
           setCommentMessageHeight={setCommentMessageHeight}
         />
-        <CommentsContainer commentMessageHeight={commentMessageHeight} />
+        <CommentsContainer
+          commentMessageHeight={commentMessageHeight}
+          commentMessages={commentMessages}
+        />
       </div>
       <div>
         <button onClick={saveToFile} disabled={isLoading}>
