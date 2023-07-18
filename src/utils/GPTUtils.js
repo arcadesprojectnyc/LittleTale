@@ -11,6 +11,7 @@ export async function handleAPIRequest(token, msgs) {
         model: "gpt-3.5-turbo",
         messages: msgs,
         temperature: 0.7,
+        max_tokens:285, // Limit the size of token 
         top_p: 1,
         frequency_penalty: 0.1,
       }),
