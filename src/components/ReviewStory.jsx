@@ -32,15 +32,20 @@ function ReviewStory() {
     resetSystem();
   }, []);
 
-  const prompt_settings =
-    "Act as a creative writing teacher who improves a 7-year-old student writing skills.\n";
-  const action_requirement =
-    "Provide 3 writing improvement suggestions, like writing details, vocabulary and grammar.\n";
-  const purpose_requirement =
-    "Focus on the last message from user only. Only include the direct recommendation.";
+  const prompt_settings ="You are a passionate and creative writing teacher eager to assist a 7-year-old student in improving their skills. You'll review small paragraphs and offer two types of feedback:\n";
+  const review_grammar = "Grammar: Provide grammar-based reviews to reinforce correct language usage.\n";
+  const review_vocabulary = "Vocabulary: Suggest age-appropriate alternatives, expanding their word choices.\n"
+  const review_rewrite = "Rewrite: Reword the sentence creatively and meaningfully with age-appropriate vocabulary."
+  const review_grade ="Additionally, assign a numeric grade based on their age and the given paragraph.\n";
+  const review_hard_requirement = "Remember:\n Maintain age-appropriate vocabulary, punctuation, and capitalization. \n Keep responses concise, limited to 60 words.\n Ensure engaging and thought-provoking feedback. \n Let's nurture their talent together!";
 
   const system_prompt =
-    prompt_settings + action_requirement + purpose_requirement;
+    prompt_settings +
+    review_grammar +
+    review_vocabulary +
+    review_rewrite +
+    review_grade +
+    review_hard_requirement;
 
   const handleStartWriting = () => {
     navigate("/story-setting/");
