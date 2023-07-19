@@ -12,6 +12,7 @@ function ReviewStory() {
   const [jumpToMessageIndex, setJumpToMessageIndex] = useState(null);
   const [commentMessageHeight, setCommentMessageHeight] = useState(null);
   const [messages, setMessages] = useState(write_story_msgs);
+  const [commentMessages, setCommentMessages] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,30 +51,32 @@ function ReviewStory() {
     navigate("/story-setting/");
   };
 
-  const handleRewriteMsg = async (index) => {
-    console.log("handleCorrectMsg:", index);
-    let ctn = "Rewrite: " + write_story_msgs[index + 1].content;
+  const handleMsgRecommendation = async (index) => {
+    console.log("ReviewStory: handle review msg: ", index);
+    setCommentMessages([]);
+    setJumpToMessageIndex(index);
+
     let msgs = messages;
     const userRoleMessage = {
       role: "user",
-      content: ctn,
+      content:
+        "Provide 3 grammar and vocabulary improvement suggestions: " +
+        write_story_msgs[index + 1].content,
     };
     msgs = [...msgs, userRoleMessage];
     setIsLoading(true);
     const apiResponse = await handleAPIRequest(token, msgs);
     setIsLoading(false);
-    if (apiResponse !== "") {
+    if (apiResponse !== "" && apiResponse.content !== null) {
       msgs = [...msgs, apiResponse];
       // The index passed in with no system msg, so plus 1 back
-      msgs[index + 1] = apiResponse;
-      console.log(msgs);
+      setCommentMessages(apiResponse.content.split("\n"));
     }
     setMessages(msgs);
   };
 
   const handleEditMsg = (index) => {
     console.log("ReviewStory: handle edit msg: ", index);
-    setJumpToMessageIndex(index);
   };
 
   const saveToFile = () => {
@@ -93,8 +96,8 @@ function ReviewStory() {
 
   const buttons = [
     {
-      label: "Comment",
-      onClick: handleRewriteMsg,
+      label: "Recommendation",
+      onClick: handleMsgRecommendation,
     },
     {
       label: "Edit",
@@ -126,7 +129,10 @@ function ReviewStory() {
           setJumpToMessageIndex={setJumpToMessageIndex}
           setCommentMessageHeight={setCommentMessageHeight}
         />
-        <CommentsContainer commentMessageHeight={commentMessageHeight} />
+        <CommentsContainer
+          commentMessageHeight={commentMessageHeight}
+          commentMessages={commentMessages}
+        />
       </div>
       <div>
         <button onClick={saveToFile} disabled={isLoading}>

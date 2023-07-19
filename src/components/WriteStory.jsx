@@ -126,7 +126,7 @@ function WriteStory() {
     setIsLoading(true);
     const apiResponse = await handleAPIRequest(token, msgs);
     setIsLoading(false);
-    if (apiResponse !== null) {
+    if (apiResponse !== null && apiResponse.content !== null) {
       let hintText = [""]; // We don't need this beginning any more. gpt will give customized beginnings
       hintText = [...hintText, ...apiResponse.content.split("\n")];
       setHintText(hintText);
@@ -159,28 +159,31 @@ function WriteStory() {
         }}
       >
         <h3>Continue The Story</h3>
-        <textarea
-          style={{
-            border: "1px solid #ccc",
-            height: "20vh",
-            padding: "10px",
-            width: "90vh",
-          }}
-          value={inputText}
-          onChange={handleInputChange}
-          disabled={isLoading}
-        ></textarea>
-        <img
-          src={hint}
-          alt="hint"
-          onClick={isLoading ? null : handleHintClick}
-          style={{
-            width: "40px",
-            height: "60px",
-            padding: "50px",
-            cursor: isLoading ? "not-allowed" : "pointer",
-          }}
-        />
+        <div style={{ display: "flex" }}>
+          <textarea
+            style={{
+              border: "1px solid #ccc",
+              height: "20vh",
+              padding: "10px",
+              width: "90vh",
+            }}
+            value={inputText}
+            onChange={handleInputChange}
+            disabled={isLoading}
+          ></textarea>
+          <img
+            src={hint}
+            alt="hint"
+            onClick={isLoading ? null : handleHintClick}
+            style={{
+              width: "40px",
+              height: "60px",
+              paddingTop: "7vh",
+              paddingLeft: "5vh",
+              cursor: isLoading ? "not-allowed" : "pointer",
+            }}
+          />
+        </div>
         {hintMode && (
           <div
             style={{
@@ -197,7 +200,7 @@ function WriteStory() {
             <button
               style={{
                 position: "absolute",
-                top: "45px",
+                top: "20px",
                 right: "30px",
                 cursor: "pointer",
                 border: "solid",
@@ -208,7 +211,7 @@ function WriteStory() {
               X
             </button>
             {hintText.map((message, index) => (
-              <p key={index} style={{ textAlign: "left" }}>
+              <p key={index} style={{ textAlign: "left", fontSize: "15px" }}>
                 {message}
               </p>
             ))}
