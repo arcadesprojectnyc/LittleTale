@@ -33,7 +33,7 @@ function ReviewStory() {
   }, []);
 
   const prompt_settings =
-    "Act as a creative writing teacher who improves a 7-year-old student writing skills.";
+    "Act as a creative writing teacher who improves a 7-year-old student writing skills.\n";
   const action_requirement =
     "Provide 3 writing improvement suggestions, like writing details, vocabulary and grammar.\n";
   const purpose_requirement =
@@ -47,7 +47,7 @@ function ReviewStory() {
   };
 
   const handleMsgRecommendation = async (index) => {
-    console.log("ReviewStory: handle edit msg: ", index);
+    console.log("ReviewStory: handle review msg: ", index);
     setCommentMessages([]);
     setJumpToMessageIndex(index);
 
@@ -55,14 +55,14 @@ function ReviewStory() {
     const userRoleMessage = {
       role: "user",
       content:
-        //"Provide 3 grammar and vocabulary improvement suggestions: " +
+        "Provide 3 grammar and vocabulary improvement suggestions: " +
         write_story_msgs[index + 1].content,
     };
     msgs = [...msgs, userRoleMessage];
     setIsLoading(true);
     const apiResponse = await handleAPIRequest(token, msgs);
     setIsLoading(false);
-    if (apiResponse !== "") {
+    if (apiResponse !== "" && apiResponse.content !== null) {
       msgs = [...msgs, apiResponse];
       // The index passed in with no system msg, so plus 1 back
       setCommentMessages(apiResponse.content.split("\n"));
@@ -70,7 +70,9 @@ function ReviewStory() {
     setMessages(msgs);
   };
 
-  const handleEditMsg = (index) => {};
+  const handleEditMsg = (index) => {
+    console.log("ReviewStory: handle edit msg: ", index);
+  };
 
   const saveToFile = () => {
     const formattedMessages = JSON.stringify(messages, null, 2);
