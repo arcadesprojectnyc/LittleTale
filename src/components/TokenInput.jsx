@@ -26,31 +26,27 @@ function TokenInput() {
   };
 
   return (
-    <div className="background-container"> {/* Updated div element */}
+    <div className="token-background-container">
       <div className="centered-content">
-        <p style={{ fontSize: "40px" }}>
-          Input OpenAI's Token below and start writing:
+        <p className="interface-header">Little Tales</p>
+        <p className="interface-text">
+        Unlock your imagination with OpenAI's magical token!
         </p>
-        <input type="text" value={token} 
-        onChange={handleTokenChange} 
-        style={{
-            fontSize: "20px", // Adjust font size
-            width: "80%", // Adjust width to make the input wider
-            padding: "10px", // Adjust padding to increase input height
-          }}/>
+        <input
+          type="text"
+          value={token}
+          onChange={handleTokenChange}
+          className="input-field"
+        />
         <div>
-          <button onClick={handleButtonClick}
-          style={{
-            fontSize: "30px", // Adjust font size
-            padding: "10px 10px", // Adjust padding to increase button size
-          }}
-          >
-            Start Writing
-            </button>
+        < button onClick={handleButtonClick} className="button">
+          Let the adventure begin!
+          </button>
         </div>
       </div>
     </div>
   );
 }
+  
 
 export default TokenInput;

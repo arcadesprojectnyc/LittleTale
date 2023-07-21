@@ -16,34 +16,102 @@
   }
 }
 
-/* Add the background class */
-.background-container {
-  background-image: url('./images/background.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 100vw; /* Ensures the div fills the entire width of its parent */
-  height: 100vh; /* Sets the height of the div to be equal to the viewport height */
-}
-
+/* Basic styles */
 .centered-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* This will make the content take up the entire viewport height */
+  height: 100vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.interface-text {
   display: flex;
+  font-family: "letscoffee";
+  font-weight: bold;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+
+.input-field {
+  font-family: "SekteCinta";
+  font-weight: bold;
+  font-size: 24px;
+  width: 30%;
+  padding: 10px;
+  border: 2px solid #D4E2D4; /* Green border color */
+  border-radius: 5px;
+}
+
+.interface-header {
+  font-family: "letscoffee";
+  display: flex;
+  font-weight: bolder;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: wheat;
+  font-size: calc(70px + 2vmin);
+  color: black;
 }
+
+.button {
+  /* Custom styles for the button */
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 16px;
+  background-color: #D4E2D4;
+  color: black;
+  font-family: "letscoffee";
+  cursor: pointer;
+}
+
+/* Custom styles for the TokenInput.jex */
+.token-background-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.token-background-container::before {
+  content: "";
+  background-image: url('./images/background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.35;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; 
+}
+
+/* Custom styles for the StorySetting.jex */
+.setting-background-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.setting-background-container::before {
+  content: "";
+  background-image: url('./images/wonderland_journey.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.35;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; 
+}
+
+
 
 .App-link {
   color: #61dafb;
@@ -59,17 +127,19 @@
 }
 
 .user-message {
-  font-family: "spilt-ink";
+  font-family: "dadha";
   background-color: lightgray;
   color: black;
+  font-size: calc(16px + 2vmin);
   padding: 10px;
   margin-bottom: 10px;
 }
 
 .assistant-message {
-  font-family: "spilt-ink";
+  font-family: "ComingSoon";
   background-color: lightgray;
   color: gray;
+  font-size: calc(16px + 2vmin);
   padding: 10px;
   margin-bottom: 10px;
 }

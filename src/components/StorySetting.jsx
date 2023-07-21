@@ -39,16 +39,33 @@ function StorySetting() {
     }
 
     return (
-        <div>
-            <p style={{ fontSize: '20px' }}>What's the character?</p>
-            <input type="text" value={charactor_type} onChange={handleCharactorTypeChange} />
-            <p style={{ fontSize: '20px' }}>What's the character's name?</p>
-            <input type="text" value={charactor_name} onChange={handleCharactorNameChange} />
-            <p style={{ fontSize: '20px' }}>Where is the character?</p>
-            <input type="text" value={where_is_charactor} onChange={handleWhereIsCharactorChange} />
+        <div className="setting-background-container">
+            <div className="centered-content">
+            <p className="interface-header">What's in your mind?</p>
+            <p className="interface-text"> What's the character?</p>
+            <input type="text" 
+            value={charactor_type} 
+            onChange={handleCharactorTypeChange} 
+            className="input-field"
+            />
+            <p className="interface-text">What's the character's name?</p>
+            <input type="text" 
+            value={charactor_name} 
+            onChange={handleCharactorNameChange}
+            className="input-field"
+             />
+            <p className="interface-text">Where is the character?</p>
+            <input type="text" 
+            value={where_is_charactor} 
+            onChange={handleWhereIsCharactorChange}
+            className="input-field"
+             />
             <div>
-                <button onClick={handleButtonClick}>Start Writing!!!</button>
-            </div>
+             < button onClick={handleButtonClick} className="button">
+             I'm ready!
+          </button>
+        </div>
+        </div>
         </div>
     );
 }
