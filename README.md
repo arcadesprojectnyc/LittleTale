@@ -3,14 +3,15 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Docker Support
+
 1. Build docker image
-`docker build -f Dockerfile -t childrensbook .`
+   `docker build -f Dockerfile -t childrensbook .`
 
 2. Run container and start app
-`docker run -it -p 4000:3000 childrensbook`
+   `docker run -it -v /Path/To/Code:/app -w /app -p 4000:3000 childrensbook`
 
 3. Access to browser and test
-`http://localhost:4000/`
+   `http://localhost:4000/`
 
 ## Available Scripts
 
