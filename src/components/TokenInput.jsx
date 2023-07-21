@@ -27,13 +27,26 @@ function TokenInput() {
 
   return (
     <div className="background-container"> {/* Updated div element */}
-      <div>
-        <p style={{ fontSize: "20px" }}>
+      <div className="centered-content">
+        <p style={{ fontSize: "40px" }}>
           Input OpenAI's Token below and start writing:
         </p>
-        <input type="text" value={token} onChange={handleTokenChange} />
+        <input type="text" value={token} 
+        onChange={handleTokenChange} 
+        style={{
+            fontSize: "20px", // Adjust font size
+            width: "80%", // Adjust width to make the input wider
+            padding: "10px", // Adjust padding to increase input height
+          }}/>
         <div>
-          <button onClick={handleButtonClick}>Start Writing</button>
+          <button onClick={handleButtonClick}
+          style={{
+            fontSize: "30px", // Adjust font size
+            padding: "10px 10px", // Adjust padding to increase button size
+          }}
+          >
+            Start Writing
+            </button>
         </div>
       </div>
     </div>

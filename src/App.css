@@ -26,6 +26,13 @@
   height: 100vh; /* Sets the height of the div to be equal to the viewport height */
 }
 
+.centered-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* This will make the content take up the entire viewport height */
+}
 
 .App-header {
   background-color: #282c34;
@@ -35,7 +42,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: black;
+  color: wheat;
 }
 
 .App-link {
