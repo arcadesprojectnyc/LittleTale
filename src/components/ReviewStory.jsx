@@ -48,7 +48,6 @@ function ReviewStory() {
     review_grammar +
     review_vocabulary +
     review_rewrite +
-    review_grade +
     review_hard_requirement;
 
   const handleStartWriting = () => {
@@ -110,7 +109,7 @@ function ReviewStory() {
 
   const buttons = [
     {
-      label: "Recommendation",
+      label: "Review",
       onClick: handleMsgRecommendation,
     },
     {
@@ -125,7 +124,7 @@ function ReviewStory() {
         width: "90vw",
       }}
     >
-      <h3>The Story</h3>
+      <h3>To Be Reviewed</h3>
       <div
         style={{
           display: "flex",
