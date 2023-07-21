@@ -18,10 +18,12 @@
 
 /* Add the background class */
 .background-container {
-  background-image: url('./images/logo_new.png');
+  background-image: url('./images/background.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  width: 100vw; /* Ensures the div fills the entire width of its parent */
+  height: 100vh; /* Sets the height of the div to be equal to the viewport height */
 }
 
 
@@ -33,7 +35,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
 .App-link {
@@ -51,14 +53,16 @@
 
 .user-message {
   font-family: "spilt-ink";
-  color: darkgreen;
+  background-color: lightgray;
+  color: black;
   padding: 10px;
   margin-bottom: 10px;
 }
 
 .assistant-message {
   font-family: "spilt-ink";
-  color: darkblue;
+  background-color: lightgray;
+  color: gray;
   padding: 10px;
   margin-bottom: 10px;
 }
