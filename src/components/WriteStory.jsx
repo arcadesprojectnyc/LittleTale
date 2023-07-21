@@ -1,15 +1,13 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { handleAPIRequest, handleMessageRole } from "../utils/GPTUtils";
+import { handleAPIRequest } from "../utils/GPTUtils";
 import { UserContext } from "./UserContext";
 import MessagesContainer from "./MessagesContainer";
 import hint from "../images/hint.png";
 
 function WriteStory() {
-  const { token, char_type, char_name, where_is_char, setWriteStoryMsgCxt } =
-    useContext(UserContext);
+  const { token, beginning, setWriteStoryMsgCxt } = useContext(UserContext);
   const [inputText, setInputText] = useState("");
-  const messageContainerRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hintMode, setHintMode] = useState(false);
   const [hintText, setHintText] = useState([]);
@@ -40,7 +38,7 @@ function WriteStory() {
     };
     const userBeginMessage = {
       role: "user",
-      content: beginning_prompt,
+      content: beginning,
     };
     msgs = [systemRoleMessage, userBeginMessage];
 
@@ -75,9 +73,6 @@ function WriteStory() {
     story_hard_requirement_3 +
     story_hard_requirement_4 +
     story_length_requirement;
-
-  const beginning_prompt =
-    "A " + char_type + " named " + char_name + " was " + where_is_char + "."; //TODO: Need to replace this with user_input_beginnings + ".";
 
   // Prompt for Hints
   const hint_request =

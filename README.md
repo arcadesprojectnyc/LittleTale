@@ -3,14 +3,19 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Docker Support
+
 1. Build docker image
-`docker build -f Dockerfile -t childrensbook .`
+   `docker build -f Dockerfile -t childrensbook .`
 
 2. Run container and start app
-`docker run -it --rm -p 4000:3000 childrensbook`
+   `docker run -it -v Path/to/ChildrensBook:/app -w /app -p 4000:3000 childrensbook`
+
+   If you haven't run this locally before, then try the following command before running docker for the first time: 
+   `docker run -it -v Path/to/ChildrensBook:/app -w /app -p 4000:3000 childrensbook npm install`
+
 
 3. Access to browser and test
-`http://localhost:4000/`
+   `http://localhost:4000/`
 
 ## Available Scripts
 
