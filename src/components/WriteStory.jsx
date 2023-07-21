@@ -56,31 +56,44 @@ function WriteStory() {
     "You are a creative writing teacher who is eager to help a 7-year-old student enhance their reading and writing skills through an exciting collaborative writing game.";
   const story_style_requirement =
     "The game involves both the teacher (that's you!) and the student taking turns to write an adventurous story together. Here are the rules to follow: \n";
-  const story_hard_requirement_1 ="1. Use symbolism, metaphor, and imagery to make the story captivating and engaging for the young reader.\n"
-  const story_hard_requirement_2 ="2. Maintain age-appropriate vocabulary and ensure correct punctuation and capitalization throughout the story.\n"
-  const story_hard_requirement_3 ="3. Ensure the storyline remains consistent and incorporates the kid's input in a creative and humorous manner.\n"
-  const story_hard_requirement_4 ="4. Avoid repeating the child's input. Instead, progress the story gradually while providing additional details. \n"
-  const story_length_requirement ="5. Keep your responses concise, using no more than 50 words each time.\n Let's embark on this storytelling adventure and create a magical world together!";
-  
+  const story_hard_requirement_1 =
+    "1. Use symbolism, metaphor, and imagery to make the story captivating and engaging for the young reader.\n";
+  const story_hard_requirement_2 =
+    "2. Maintain age-appropriate vocabulary and ensure correct punctuation and capitalization throughout the story.\n";
+  const story_hard_requirement_3 =
+    "3. Ensure the storyline remains consistent and incorporates the kid's input in a creative and humorous manner.\n";
+  const story_hard_requirement_4 =
+    "4. Avoid repeating the child's input. Instead, progress the story gradually while providing additional details. \n";
+  const story_length_requirement =
+    "5. Keep your responses concise, using no more than 50 words each time.\n Let's embark on this storytelling adventure and create a magical world together!";
+
   const system_prompt =
     prompt_settings +
     story_style_requirement +
     story_hard_requirement_1 +
-    story_hard_requirement_2 + 
+    story_hard_requirement_2 +
     story_hard_requirement_3 +
-    story_hard_requirement_4 + 
+    story_hard_requirement_4 +
     story_length_requirement;
 
-  const beginning_prompt = "A " + char_type + " named " + char_name + " was " + where_is_char + "."; //TODO: Need to replace this with user_input_beginnings + "."; 
-  
-  
-  // Prompt for Hints
-  const hint_request = "I've reached a point in the game where I'm unsure how to proceed with the story. Could you please provide 3 potential directions that I can take with some guiding questions to help me explore each option further?";
-  const hint_hard_requirment = "Remember to consider the story so far and make the questions engaging and thought-provoking.  To make it more engaging and thought-provoking, please continue to use a teacher's tone.";
-  const hint_length_requirement = "Keep your responses concise, using no more than 60 words each time." ;
-  const hint_beginning_requirement = "Begin with 'Here are some hints to continue our story.'";
+  const beginning_prompt =
+    "A " + char_type + " named " + char_name + " was " + where_is_char + "."; //TODO: Need to replace this with user_input_beginnings + ".";
 
-  const hint_prompt = hint_request + hint_hard_requirment + hint_length_requirement + hint_beginning_requirement;
+  // Prompt for Hints
+  const hint_request =
+    "I've reached a point in the game where I'm unsure how to proceed with the story. Could you please provide 3 potential directions that I can take with some guiding questions to help me explore each option further?";
+  const hint_hard_requirment =
+    "Remember to consider the story so far and make the questions engaging and thought-provoking.  To make it more engaging and thought-provoking, please continue to use a teacher's tone.";
+  const hint_length_requirement =
+    "Keep your responses concise, using no more than 60 words each time.";
+  const hint_beginning_requirement =
+    "Begin with 'Here are some hints to continue our story.'";
+
+  const hint_prompt =
+    hint_request +
+    hint_hard_requirment +
+    hint_length_requirement +
+    hint_beginning_requirement;
 
   const handleContinueStoryClick = async () => {
     let msgs = messages;
@@ -165,7 +178,7 @@ function WriteStory() {
               border: "1px solid #ccc",
               height: "20vh",
               padding: "10px",
-              width: "90vh",
+              width: "90%",
             }}
             value={inputText}
             onChange={handleInputChange}
