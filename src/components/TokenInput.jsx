@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import logo from "../images/logo.png";
 import "../App.css";
 import { UserContext } from "./UserContext";
 
@@ -27,19 +26,27 @@ function TokenInput() {
   };
 
   return (
-    <div>
-      <img src={logo} className="App-logo" alt="logo" />
-      <div>
-        <p style={{ fontSize: "20px" }}>
-          Input OpenAI's Token below and start writing:
+    <div className="token-background-container">
+      <div className="centered-content">
+        <p className="interface-header">Little Tales</p>
+        <p className="interface-text">
+        Unlock your imagination with OpenAI's magical token!
         </p>
-        <input type="text" value={token} onChange={handleTokenChange} />
+        <input
+          type="text"
+          value={token}
+          onChange={handleTokenChange}
+          className="input-field"
+        />
         <div>
-          <button onClick={handleButtonClick}>Start Writing</button>
+        < button onClick={handleButtonClick} className="button">
+          Let the adventure begin!
+          </button>
         </div>
       </div>
     </div>
   );
 }
+  
 
 export default TokenInput;

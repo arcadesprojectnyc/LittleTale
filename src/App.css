@@ -1,3 +1,5 @@
+@import url("./fonts.css");
+
 .App {
   text-align: center;
 }
@@ -7,22 +9,120 @@
   pointer-events: none;
 }
 
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-scale infinite 20s linear;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Basic styles */
+.centered-content {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.interface-text {
+  display: flex;
+  font-family: "letscoffee";
+  font-weight: bold;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+
+.input-field {
+  font-weight: bold;
+  font-size: 24px;
+  width: 30%;
+  padding: 10px;
+  border: 2px solid #D4E2D4; /* Green border color */
+  border-radius: 5px;
+}
+
+
+.input-textarea {
+  /* Custom styles for the textarea */
+  font-weight: bold;
+  font-size: 24px;
+  border: 2px solid #D4E2D4; /* Green border color */
+  height: 20vh;
+  padding: 10px;
+  width: 40vh;
+  resize: none; /* Prevent textarea from being resizable */
+}
+
+.interface-header {
+  font-family: "letscoffee";
+  display: flex;
+  font-weight: bolder;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: calc(70px + 2vmin);
+  color: black;
 }
+
+.button {
+  /* Custom styles for the button */
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 16px;
+  background-color: #D4E2D4;
+  color: black;
+  font-family: "letscoffee";
+  cursor: pointer;
+}
+
+/* Custom styles for the TokenInput.jex */
+.token-background-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.token-background-container::before {
+  content: "";
+  background-image: url('./images/background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.35;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; 
+}
+
+/* Custom styles for the StorySetting.jex */
+.setting-background-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.setting-background-container::before {
+  content: "";
+  background-image: url('./images/wonderland_journey.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.35;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; 
+}
+
+
 
 .App-link {
   color: #61dafb;
@@ -38,15 +138,19 @@
 }
 
 .user-message {
-  background-color: lightblue;
-  color: darkgreen;
+  font-family: "dadha";
+  background-color: lightgray;
+  color: black;
+  font-size: calc(16px + 2vmin);
   padding: 10px;
   margin-bottom: 10px;
 }
 
 .assistant-message {
-  background-color: lightgreen;
-  color: darkblue;
+  font-family: "ComingSoon";
+  background-color: lightgray;
+  color: gray;
+  font-size: calc(16px + 2vmin);
   padding: 10px;
   margin-bottom: 10px;
 }
