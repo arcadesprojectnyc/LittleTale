@@ -124,7 +124,7 @@ function ReviewStory() {
         width: "90vw",
       }}
     >
-      <h3>To Be Reviewed</h3>
+      <h3 style={{ fontFamily: "spilt-ink" }}>To Be Reviewed</h3>
       <div
         style={{
           display: "flex",
