@@ -9,11 +9,21 @@
   pointer-events: none;
 }
 
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-scale infinite 20s linear;
   }
 }
+
+/* Add the background class */
+.background-container {
+  background-image: url('./images/logo_new.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 
 .App-header {
   background-color: #282c34;

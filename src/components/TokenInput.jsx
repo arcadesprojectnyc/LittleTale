@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import logo from "../images/logo.png";
+import logo from "../images/logo_new.png";
 import "../App.css";
 import { UserContext } from "./UserContext";
 
@@ -27,8 +27,7 @@ function TokenInput() {
   };
 
   return (
-    <div>
-      <img src={logo} className="App-logo" alt="logo" />
+    <div className="background-container"> {/* Updated div element */}
       <div>
         <p style={{ fontSize: "20px" }}>
           Input OpenAI's Token below and start writing:
