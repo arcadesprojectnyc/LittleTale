@@ -20,19 +20,13 @@ const MessagesContainer = ({
   const [editMessage, setEditMessage] = useState("");
 
   const adjustButtonsPosition = () => {
-    console.log("MSGCTN: adjBtns");
     if (containerRef.current) {
-      console.log("MSGCTN: containerRef");
-
       const containerWidth = containerRef.current.offsetWidth;
       const buttonContainer =
         containerRef.current.querySelector(".button-container");
 
       if (buttonContainer) {
-        console.log("MSGCTN: buttonContainer: ", buttonContainer);
-
         const buttons = buttonContainer.querySelectorAll("button");
-
         let accumulatedWidth = 0;
         buttons.forEach((button) => {
           accumulatedWidth += button.offsetWidth;
@@ -169,15 +163,18 @@ const MessagesContainer = ({
             )}
             {buttons &&
               (editMessageIndex == null || editMessageIndex != index) &&
-              buttons.map((button, buttonIndex) => (
-                <button
-                  key={buttonIndex}
-                  onClick={() => button.onClick(index)}
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Wait" : button.label}
-                </button>
-              ))}
+              buttons.map(
+                (button, buttonIndex) =>
+                  (button.role == null || button.role == message.role) && (
+                    <button
+                      key={buttonIndex}
+                      onClick={() => button.onClick(index)}
+                      disabled={isLoading}
+                    >
+                      {isLoading ? "Wait" : button.label}
+                    </button>
+                  )
+              )}
           </div>
         </div>
       ))}

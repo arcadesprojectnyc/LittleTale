@@ -109,10 +109,12 @@ function ReviewStory() {
 
   const buttons = [
     {
+      role: "user",
       label: "Review",
       onClick: handleMsgRecommendation,
     },
     {
+      role: "user",
       label: "Edit",
       onClick: handleEditMsg,
     },
