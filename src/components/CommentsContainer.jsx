@@ -4,7 +4,7 @@ const CommentsContainer = ({ commentMessageHeight, commentMessages }) => {
   return (
     <div
       style={{
-        height: "70vh",
+        height: "85vh",
         width: "30vw",
         justifyContent: "space-between",
         padding: "10px",

@@ -12,8 +12,6 @@ const MessagesContainer = ({
   setJumpToMessageIndex,
   setCommentMessageHeight,
   editMessageIndex,
-  setEditMessageIndex,
-  setEditedMessage,
 }) => {
   const containerRef = useRef(null);
   const messageRefs = useRef([]);
@@ -94,22 +92,6 @@ const MessagesContainer = ({
     setEditMessage(event.target.value);
   };
 
-  const handleEditCancel = () => {
-    if (setEditMessageIndex != null) {
-      setEditMessageIndex(null);
-      setEditMessage("");
-    }
-  };
-
-  const handleEditSave = () => {
-    if (editMessage !== "" && setEditedMessage) {
-      setEditedMessage(editMessage);
-      setEditMessage("");
-    } else if (setEditMessageIndex != null) {
-      setEditMessageIndex(null);
-    }
-  };
-
   return (
     <div
       ref={containerRef}
@@ -155,12 +137,20 @@ const MessagesContainer = ({
             className="button-container"
             style={{ position: "absolute", bottom: "5px", right: "5px" }}
           >
-            {editMessageIndex == index && (
-              <>
-                <button onClick={handleEditCancel}>Cancel</button>
-                <button onClick={handleEditSave}>Save</button>
-              </>
-            )}
+            {editMessageIndex == index &&
+              buttons &&
+              buttons.map(
+                (button, buttonIndex) =>
+                  button.role == "edit" && (
+                    <button
+                      key={buttonIndex}
+                      onClick={() => button.onClick(editMessage)}
+                      disabled={isLoading}
+                    >
+                      {isLoading ? "Wait" : button.label}
+                    </button>
+                  )
+              )}
             {buttons &&
               (editMessageIndex == null || editMessageIndex != index) &&
               buttons.map(

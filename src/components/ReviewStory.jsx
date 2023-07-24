@@ -78,20 +78,12 @@ function ReviewStory() {
     setMessages(msgs);
   };
 
-  const setEditedMessage = (msg) => {
-    console.log(
-      "setEditedMessage: ",
-      msg,
-      " editMessageIndex: ",
-      editMessageIndex
-    );
-    let temp_write_story_msgs = write_story_msgs;
-    temp_write_story_msgs[editMessageIndex + 1] = {
-      role: "user",
-      content: msg,
-    };
-    setWriteStoryMsgCxt(temp_write_story_msgs);
-    setEditMessageIndex(null);
+  const saveToFile = () => {
+    const formattedMessages = JSON.stringify(messages, null, 2);
+    const blob = new Blob([formattedMessages], {
+      type: "application/json;charset=utf-8",
+    });
+    saveAs(blob, "messages.json");
   };
 
   const handleEditMsg = (index) => {
@@ -99,12 +91,20 @@ function ReviewStory() {
     setEditMessageIndex(index);
   };
 
-  const saveToFile = () => {
-    const formattedMessages = JSON.stringify(messages, null, 2);
-    const blob = new Blob([formattedMessages], {
-      type: "application/json;charset=utf-8",
-    });
-    saveAs(blob, "messages.json");
+  const handleEditCancel = () => {
+    setEditMessageIndex(null);
+  };
+
+  const handleEditSave = (msg) => {
+    if (msg !== "") {
+      let temp_write_story_msgs = write_story_msgs;
+      temp_write_story_msgs[editMessageIndex + 1] = {
+        role: "user",
+        content: msg,
+      };
+      setWriteStoryMsgCxt(temp_write_story_msgs);
+    }
+    setEditMessageIndex(null);
   };
 
   const buttons = [
@@ -118,12 +118,23 @@ function ReviewStory() {
       label: "Edit",
       onClick: handleEditMsg,
     },
+    {
+      role: "edit",
+      label: "Cancel",
+      onClick: handleEditCancel,
+    },
+    {
+      role: "edit",
+      label: "Save",
+      onClick: handleEditSave,
+    },
   ];
 
   return (
     <div
       style={{
         width: "90vw",
+        height: "90vh",
       }}
     >
       <h3 style={{ fontFamily: "spilt-ink" }}>To Be Reviewed</h3>
@@ -135,7 +146,7 @@ function ReviewStory() {
       >
         <MessagesContainer
           messages={write_story_msgs}
-          height="70vh"
+          height="85vh"
           width="70vw"
           autoScroll={false}
           buttons={buttons}
@@ -144,8 +155,6 @@ function ReviewStory() {
           setJumpToMessageIndex={setJumpToMessageIndex}
           setCommentMessageHeight={setCommentMessageHeight}
           editMessageIndex={editMessageIndex}
-          setEditMessageIndex={setEditMessageIndex}
-          setEditedMessage={setEditedMessage}
         />
         <CommentsContainer
           commentMessageHeight={commentMessageHeight}

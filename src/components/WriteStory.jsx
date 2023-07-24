@@ -3,51 +3,44 @@ import { useNavigate } from "react-router-dom";
 import { handleAPIRequest } from "../utils/GPTUtils";
 import { UserContext } from "./UserContext";
 import MessagesContainer from "./MessagesContainer";
-import hint from "../images/hint1.png";
+import hint from "../images/hint.png";
+import HintPopUp from "./HintPopUp";
 
 function WriteStory() {
-  const { token, beginning, setWriteStoryMsgCxt } = useContext(UserContext);
-  const [inputText, setInputText] = useState("");
+  const { token, beginning, write_story_msgs, setWriteStoryMsgCxt } =
+    useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [hintMode, setHintMode] = useState(false);
+  const [autoScroll, setAutoScroll] = useState(false);
   const [hintText, setHintText] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [editIndex, setEditIndex] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
+    if (write_story_msgs.length == 0) {
       let msgs = messages;
-      if (messages.length == 2) {
-        setIsLoading(true);
-        const apiResponse = await handleAPIRequest(token, msgs);
-        setIsLoading(false);
-        if (apiResponse !== "") {
-          msgs = [...msgs, apiResponse];
-        }
-        setMessages(msgs);
-      }
-    };
-    fetchData();
-  }, [messages]);
-
-  useEffect(() => {
-    let msgs = messages;
-    const systemRoleMessage = {
-      role: "system",
-      content: system_prompt,
-    };
-    const userBeginMessage = {
-      role: "user",
-      content: beginning,
-    };
-    msgs = [systemRoleMessage, userBeginMessage];
-
-    setMessages(msgs);
+      const systemRoleMessage = {
+        role: "system",
+        content: system_prompt,
+      };
+      const userBeginMessage = {
+        role: "user",
+        content: beginning,
+      };
+      msgs = [systemRoleMessage, userBeginMessage];
+      setMessages(msgs);
+      callGPTApi(msgs);
+    } else {
+      const userEditMsg = {
+        role: "user",
+        content: "",
+      };
+      setMessages([...write_story_msgs, userEditMsg]);
+      setEditIndex(write_story_msgs.length - 1);
+    }
   }, []);
-
-  const handleInputChange = (event) => {
-    setInputText(event.target.value);
-  };
 
   // Prompt for setting up the story game
   const prompt_settings =
@@ -90,24 +83,36 @@ function WriteStory() {
     hint_length_requirement +
     hint_beginning_requirement;
 
-  const handleContinueStoryClick = async () => {
-    let msgs = messages;
-    if (msgs.length != 0 && inputText != "") {
+  const callGPTApi = async (msgs) => {
+    setIsLoading(true);
+    const apiResponse = await handleAPIRequest(token, msgs);
+    setIsLoading(false);
+    const userEditMsg = {
+      role: "user",
+      content: "",
+    };
+    if (apiResponse !== null) {
+      msgs = [...msgs, apiResponse, userEditMsg];
+    } else {
+      msgs = [...msgs, userEditMsg];
+    }
+    setMessages(msgs);
+    setAutoScroll(true);
+    setEditIndex(msgs.length - 2);
+  };
+
+  const handleContinueStoryClick = async (msg) => {
+    setEditIndex(null);
+    let msgs = messages.slice(0, -1); // without the last append input box
+    if (msgs.length != 0) {
       const userRoleMessage = {
         role: "user",
-        content: inputText,
+        content: msg,
       };
       msgs = [...msgs, userRoleMessage];
     }
     setMessages(msgs);
-    setInputText("");
-    setIsLoading(true);
-    const apiResponse = await handleAPIRequest(token, msgs);
-    setIsLoading(false);
-    if (apiResponse !== null) {
-      msgs = [...msgs, apiResponse];
-    }
-    setMessages(msgs);
+    callGPTApi(msgs);
   };
 
   const handleRewriteStrotyClick = () => {
@@ -116,11 +121,11 @@ function WriteStory() {
 
   const handleFinishStory = () => {
     console.log("[WriteStory] Finish Story");
-    setWriteStoryMsgCxt(messages);
+    setWriteStoryMsgCxt(messages.slice(0, -1));
     navigate("/review-story/");
   };
 
-  const handleHintClick = async () => {
+  const handleHintClick = async (msg) => {
     console.log("[WriteStory]Image clicked");
     setHintMode(true);
     let msgs = messages;
@@ -147,86 +152,61 @@ function WriteStory() {
     setHintText([]);
   };
 
+  const handleDeleteMsg = (deleteIndex) => {
+    // The index 0 is for system in messages, not displayed on UI.
+    const updatedMsgs = messages.filter(
+      (_, index) => index !== deleteIndex + 1
+    );
+    setAutoScroll(false);
+    setEditIndex(updatedMsgs.length - 2);
+    setMessages(updatedMsgs);
+  };
+
+  const buttons = [
+    {
+      label: "Delete",
+      onClick: handleDeleteMsg,
+    },
+    {
+      role: "edit",
+      label: "Hint",
+      onClick: handleHintClick,
+    },
+    {
+      role: "edit",
+      label: "AI Continue",
+      onClick: handleContinueStoryClick,
+    },
+  ];
+
   return (
-  <div style={{ width: "90vw" }}>
-    <div style={{ marginBottom: "20px" }}>
-      <h3>Need to change</h3>
-      <MessagesContainer messages={messages} height="40vh" autoScroll={true} />
-    </div>
-    <div style={{ marginBottom: "20px" }}>
-      <h3>Continue The Story</h3>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <textarea
-          style={{
-            border: "1px solid #ccc",
-            height: "20vh",
-            padding: "10px",
-            width: "90%",
-          }}
-          value={inputText}
-          onChange={handleInputChange}
-          disabled={isLoading}
-        ></textarea>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <img
-            src={hint}
-            alt="hint"
-            onClick={isLoading ? null : handleHintClick}
-            style={{
-              width: "150px",
-              height: "150px",
-              cursor: isLoading ? "not-allowed" : "pointer",
-            }}
-          />
-          <p className="interface-text">Need some hints?</p>
+    <div style={{ width: "90vw" }}>
+      <div style={{ marginBottom: "20px" }}>
+        <h3>Need to change</h3>
+        <div>
+          <button onClick={handleRewriteStrotyClick} disabled={isLoading}>
+            {isLoading ? "Wait" : "Rewrite Story"}
+          </button>
+          <button onClick={handleFinishStory} disabled={isLoading}>
+            {isLoading ? "Wait" : "Finish Story"}
+          </button>
         </div>
+
+        <MessagesContainer
+          messages={messages}
+          height="85vh"
+          autoScroll={autoScroll}
+          buttons={buttons}
+          editMessageIndex={editIndex}
+        />
       </div>
       {hintMode && (
-        <div
-          style={{
-            position: "absolute",
-            top: "40px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            background: "#0c48c0",
-            padding: "10px",
-            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
-            zIndex: 1,
-          }}
-        >
-          <button
-            style={{
-              position: "absolute",
-              top: "20px",
-              right: "30px",
-              cursor: "pointer",
-              border: "solid",
-              background: "#ffffff",
-            }}
-            onClick={handleClosePopup}
-          >
-            X
-          </button>
-          {hintText.map((message, index) => (
-            <p key={index} style={{ textAlign: "left", fontSize: "15px" }}>
-              {message}
-            </p>
-          ))}
-        </div>
+        <HintPopUp
+          hintText={hintText}
+          handleClosePopup={handleClosePopup}
+        ></HintPopUp>
       )}
     </div>
-    <div style={{ marginTop: "20px" }}>
-      <button onClick={handleContinueStoryClick} disabled={isLoading}>
-        {isLoading ? "Wait" : "Continue Story"}
-      </button>
-      <button onClick={handleRewriteStrotyClick} disabled={isLoading}>
-        {isLoading ? "Wait" : "Rewrite Story"}
-      </button>
-      <button onClick={handleFinishStory} disabled={isLoading}>
-        {isLoading ? "Wait" : "Finish Story"}
-      </button>
-    </div>
-  </div>
   );
 }
 export default WriteStory;
