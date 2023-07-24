@@ -31,31 +31,32 @@ function StorySetting() {
       navigate(path);
     }
   };
-
-  return (
-    <div>
-      <p style={{ fontSize: "20px" }}>Name your character:</p>
-      <input
-        type="text"
-        value={charactor_name}
-        onChange={handleCharactorNameChange}
-      />
-      <p style={{ fontSize: "20px" }}>Write the beginning of the Story:</p>
-      <textarea
-        style={{
-          border: "1px solid #ccc",
-          height: "20vh",
-          padding: "10px",
-          width: "60vh",
-        }}
-        value={beginning}
-        onChange={handleBeginningChange}
-      ></textarea>
-      <div>
-        <button onClick={handleButtonClick}>Start Writing!!!</button>
-      </div>
-    </div>
-  );
+  
+    return (
+        <div className="setting-background-container">
+            <div className="centered-content">
+            <p className="interface-header">What's in your mind?</p>
+            <p className="interface-text">Name your character:</p>
+            <input type="text" 
+            value={charactor_name} 
+            onChange={handleCharactorNameChange}
+            className="input-field"
+             />
+            <p className="interface-text">Write the beginning of the Story:</p>
+            <textarea
+                className="input-textarea"
+                value={beginning}
+                onChange={handleBeginningChange}
+                placeholder="Write the beginning of the Story..."
+              ></textarea>
+            <div>
+             < button onClick={handleButtonClick} className="button">
+             I'm ready!
+          </button>
+        </div>
+        </div>
+        </div>
+    );
 }
 
 export default StorySetting;
