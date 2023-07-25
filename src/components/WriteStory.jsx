@@ -180,7 +180,7 @@ function WriteStory() {
   ];
 
   return (
-    <div>
+    <div className="write-background-container">
       <div style={{ marginBottom: "20px" }}>
         <h2 className="h2-style" style={{ marginUpper: "30px"}}>Need to change</h2>
         <div>

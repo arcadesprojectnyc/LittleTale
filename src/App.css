@@ -94,7 +94,31 @@
   margin-left: 1rem;
 }
 
+/* Custom styles for the WriteStory.jex */
+
+.write-background-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.write-background-container::before {
+  content: "";
+  background-image: url("./images/animal_background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.35;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
 /* Custom styles for the MessagesContainer.jex */
+
 .custom-message-container {
   border: 2px solid lightgray;
   margin-bottom: 20px;
