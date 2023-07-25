@@ -8,9 +8,7 @@ const MessagesContainer = ({
   autoScroll,
   buttons,
   isLoading,
-  jumpToMessageIndex,
-  setJumpToMessageIndex,
-  setCommentMessageHeight,
+  reviewMessageIndex,
   editMessageIndex,
 }) => {
   const containerRef = useRef(null);
@@ -63,23 +61,8 @@ const MessagesContainer = ({
   }, [editMessageIndex]);
 
   useEffect(() => {
-    jumpToIndex(jumpToMessageIndex);
-    if (setCommentMessageHeight) {
-      setTimeout(() => {
-        const element = messageRefs.current[jumpToMessageIndex];
-        const containerRect = containerRef.current.getBoundingClientRect();
-        if (element) {
-          const messageRect = element.getBoundingClientRect();
-          const topDiff = messageRect.top - containerRect.top;
-
-          setCommentMessageHeight(topDiff);
-        }
-      }, 500);
-    }
-    if (setJumpToMessageIndex) {
-      setJumpToMessageIndex(null);
-    }
-  }, [jumpToMessageIndex]);
+    jumpToIndex(reviewMessageIndex);
+  }, [reviewMessageIndex]);
 
   let filteredMessages = [];
   if (messages && messages.length > 0) {

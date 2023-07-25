@@ -9,7 +9,6 @@
   pointer-events: none;
 }
 
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-scale infinite 20s linear;
@@ -34,22 +33,20 @@
   color: black;
 }
 
-
 .input-field {
   font-weight: bold;
   font-size: 24px;
   width: 30%;
   padding: 10px;
-  border: 2px solid #D4E2D4; /* Green border color */
+  border: 2px solid #d4e2d4; /* Green border color */
   border-radius: 5px;
 }
-
 
 .input-textarea {
   /* Custom styles for the textarea */
   font-weight: bold;
   font-size: 24px;
-  border: 2px solid #D4E2D4; /* Green border color */
+  border: 2px solid #d4e2d4; /* Green border color */
   height: 20vh;
   padding: 10px;
   width: 40vh;
@@ -72,7 +69,7 @@
   font-size: 24px;
   font-weight: bold;
   padding: 10px 16px;
-  background-color: #D4E2D4;
+  background-color: #d4e2d4;
   color: black;
   font-family: "letscoffee";
   cursor: pointer;
@@ -87,7 +84,7 @@
 
 .token-background-container::before {
   content: "";
-  background-image: url('./images/background.png');
+  background-image: url("./images/background.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -97,10 +94,10 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1; 
+  z-index: -1;
 }
 
-/* Custom styles for the StorySetting.jex */
+/* Custom styles for the StorySetting.jsx */
 .setting-background-container {
   position: relative;
   width: 100vw;
@@ -109,7 +106,7 @@
 
 .setting-background-container::before {
   content: "";
-  background-image: url('./images/wonderland_journey.png');
+  background-image: url("./images/wonderland_journey.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -119,10 +116,8 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1; 
+  z-index: -1;
 }
-
-
 
 .App-link {
   color: #61dafb;

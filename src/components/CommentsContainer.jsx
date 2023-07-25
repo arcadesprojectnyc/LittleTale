@@ -1,6 +1,6 @@
 import React from "react";
 
-const CommentsContainer = ({ commentMessageHeight, commentMessages }) => {
+const CommentsContainer = ({ commentMessages }) => {
   return (
     <div
       style={{
@@ -11,23 +11,11 @@ const CommentsContainer = ({ commentMessageHeight, commentMessages }) => {
         border: "1px solid #ccc",
       }}
     >
-      {commentMessageHeight && (
-        <>
-          <div style={{ height: commentMessageHeight }}></div>
-          <div
-            style={{
-              height: `calc(100% - ${commentMessageHeight}px)`,
-              overflow: "auto",
-            }}
-          >
-            {commentMessages.map((message, index) => (
-              <p key={index} style={{ textAlign: "left", fontSize: "15px" }}>
-                {message}
-              </p>
-            ))}
-          </div>
-        </>
-      )}
+      {commentMessages.map((message, index) => (
+        <p key={index} style={{ textAlign: "left", fontSize: "15px" }}>
+          {message}
+        </p>
+      ))}
     </div>
   );
 };

@@ -180,11 +180,15 @@ function WriteStory() {
   ];
 
   return (
-    <div style={{ width: "90vw" }}>
+    <div>
       <div style={{ marginBottom: "20px" }}>
         <h3>Need to change</h3>
         <div>
-          <button onClick={handleRewriteStrotyClick} disabled={isLoading}>
+          <button
+            style={{ right: "10px" }}
+            onClick={handleRewriteStrotyClick}
+            disabled={isLoading}
+          >
             {isLoading ? "Wait" : "Rewrite Story"}
           </button>
           <button onClick={handleFinishStory} disabled={isLoading}>

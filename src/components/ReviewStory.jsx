@@ -12,9 +12,8 @@ function ReviewStory() {
   const { token, write_story_msgs, setWriteStoryMsgCxt } =
     useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
-  const [jumpToMessageIndex, setJumpToMessageIndex] = useState(null);
+  const [reviewMessageIndex, setReviewMessageIndex] = useState(null);
   const [editMessageIndex, setEditMessageIndex] = useState(null);
-  const [commentMessageHeight, setCommentMessageHeight] = useState(null);
   const [messages, setMessages] = useState([]);
   const [commentMessages, setCommentMessages] = useState([]);
   const navigate = useNavigate();
@@ -54,10 +53,10 @@ function ReviewStory() {
     navigate("/story-setting/");
   };
 
-  const handleMsgRecommendation = async (index) => {
+  const handleMsgReview = async (index) => {
     console.log("ReviewStory: handle review msg: ", index);
     setCommentMessages([]);
-    setJumpToMessageIndex(index);
+    setReviewMessageIndex(index);
 
     let msgs = messages;
     const userRoleMessage = {
@@ -111,7 +110,7 @@ function ReviewStory() {
     {
       role: "user",
       label: "Review",
-      onClick: handleMsgRecommendation,
+      onClick: handleMsgReview,
     },
     {
       role: "user",
@@ -133,41 +132,42 @@ function ReviewStory() {
   return (
     <div
       style={{
-        width: "90vw",
-        height: "90vh",
+        width: "100vw",
+        height: "98vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <h3 style={{ fontFamily: "spilt-ink" }}>To Be Reviewed</h3>
-      <div
-        style={{
-          display: "flex",
-          width: "90vw",
-        }}
-      >
-        <MessagesContainer
-          messages={write_story_msgs}
-          height="85vh"
-          width="70vw"
-          autoScroll={false}
-          buttons={buttons}
-          isLoading={isLoading}
-          jumpToMessageIndex={jumpToMessageIndex}
-          setJumpToMessageIndex={setJumpToMessageIndex}
-          setCommentMessageHeight={setCommentMessageHeight}
-          editMessageIndex={editMessageIndex}
-        />
-        <CommentsContainer
-          commentMessageHeight={commentMessageHeight}
-          commentMessages={commentMessages}
-        />
-      </div>
-      <div>
-        <button onClick={saveToFile} disabled={isLoading}>
-          {isLoading ? "Wait" : "Save Story"}
-        </button>
-        <button onClick={handleStartWriting} disabled={isLoading}>
-          {isLoading ? "Wait" : "Start Writing Again"}
-        </button>
+      <div style={{ width: "95vw" }}>
+        <h3 style={{ fontFamily: "spilt-ink" }}>To Be Reviewed</h3>
+        <div>
+          <button onClick={saveToFile} disabled={isLoading}>
+            {isLoading ? "Wait" : "Save Story"}
+          </button>
+          <button onClick={handleStartWriting} disabled={isLoading}>
+            {isLoading ? "Wait" : "Start Writing Again"}
+          </button>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+          }}
+        >
+          <MessagesContainer
+            messages={write_story_msgs}
+            height="85vh"
+            width="70vw"
+            autoScroll={false}
+            buttons={buttons}
+            isLoading={isLoading}
+            reviewMessageIndex={reviewMessageIndex}
+            editMessageIndex={editMessageIndex}
+          />
+          <CommentsContainer commentMessages={commentMessages} />
+        </div>
       </div>
     </div>
   );
