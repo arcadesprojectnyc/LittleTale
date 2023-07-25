@@ -88,26 +88,67 @@
   cursor: pointer;
   border: 2px solid lightgray; 
   border-radius: 10px; /* Set border radius to create round corners */
-  margin-top: "10px";
-  margin-bottom: "10px";
-  margin-right: "10px";
-  margin-left: "10px";
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+/* Custom styles for the MessagesContainer.jex */
+.custom-message-container {
+  border: 2px solid lightgray;
+  margin-bottom: 20px;
+  /* height and width will be applied using the style attribute in JSX */
+  /* padding: 10px; */
+  overflow: auto;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  text-align: left;
+  position: relative;
+  border-radius: 10px; /* Set border radius to create round corners */
+  font-family: 'Nunito Sans';
+  font-weight: regular;
+  font-size: calc(12px + 1vmin);
+}
+
+.message-textarea {
+  font-family: 'Nunito Sans';
+  font-weight: regular;
+  font-size: calc(12px + 1vmin);
+  height: 20vh;
+  width: 99%;
+}
+
+.message-edit-button {
+  font-size: calc(8px + 1vmin);
+  font-family: 'Nunito Sans';
+  font-weight: bold;
+  padding: 3px 3px;
+  background-color: wheat;
+  color:black;
+  cursor: pointer;
+  border: 2px solid lightgray; 
+  border-radius: 10px; /* Set border radius to create round corners */
+  margin-top: 2rem;
+  margin-bottom: 0rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
 }
 
 .message-button {
-  font-size: 18px;
+  font-size: calc(6px + 1vmin);
   font-family: 'Nunito Sans';
   font-weight: bold;
-  padding: 5px 5px;
+  padding: 3px 3px;
   background-color: lightgray;
   color:black;
   cursor: pointer;
   border: 2px solid lightgray; 
   border-radius: 10px; /* Set border radius to create round corners */
-  margin-top: "5px";
-  margin-bottom: "5x";
-  margin-right: "5px";
-  margin-left: "5px";
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 
