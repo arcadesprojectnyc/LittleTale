@@ -101,7 +101,7 @@ const MessagesContainer = ({
             // Render the message content
             <div>{message.content}</div>
           )}
-
+          <p> </p>
           <div
             className="button-container"
             style={{ position: "absolute", bottom: "5px", right: "5px" }}
@@ -115,7 +115,7 @@ const MessagesContainer = ({
                       key={buttonIndex}
                       onClick={() => button.onClick(editMessage)}
                       disabled={isLoading}
-                      className="message-edit-button" // Apply the "message-button" class here
+                      className="message-hintpost-button" // Apply the "message-button" class here
                     >
                       {isLoading ? "Wait" : button.label}
                     </button>
