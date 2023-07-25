@@ -16,6 +16,26 @@
 }
 
 /* Basic styles */
+.h1-style {
+  font-family: 'Forum';
+  display: flex;
+  font-weight: regular;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(62px + 2vmin);
+  color: black;
+}
+.h2-style {
+  font-family: 'Forum';
+  display: flex;
+  font-weight: bold;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(38px + 2vmin);
+  color: black;
+}
 .centered-content {
   display: flex;
   flex-direction: column;
@@ -26,54 +46,71 @@
 
 .interface-text {
   display: flex;
-  font-family: "letscoffee";
+  font-family: 'Nunito Sans';
   font-weight: bold;
   align-items: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(14px + 1vmin);
   color: black;
 }
 
 .input-field {
-  font-weight: bold;
-  font-size: 24px;
+  font-family: 'Nunito Sans';
+  font-weight: regular;
+  font-size: calc(12px + 1vmin);
   width: 30%;
-  padding: 10px;
-  border: 2px solid #d4e2d4; /* Green border color */
-  border-radius: 5px;
+  padding: 5px;
+  border: 2px solid lightgray; 
+  border-radius: 10px; /* Set border radius to create round corners */
 }
 
 .input-textarea {
   /* Custom styles for the textarea */
-  font-weight: bold;
-  font-size: 24px;
-  border: 2px solid #d4e2d4; /* Green border color */
+  font-family: 'Nunito Sans';
+  font-weight: regular;
+  font-size: calc(12px + 1vmin);
   height: 20vh;
   padding: 10px;
   width: 40vh;
+  border: 2px solid lightgray; 
   resize: none; /* Prevent textarea from being resizable */
+  border-radius: 10px; /* Set border radius to create round corners */
 }
 
-.interface-header {
-  font-family: "letscoffee";
-  display: flex;
-  font-weight: bolder;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(70px + 2vmin);
-  color: black;
-}
 
 .button {
   /* Custom styles for the button */
-  font-size: 24px;
+  font-size: 20px;
+  font-family: 'Nunito Sans';
   font-weight: bold;
-  padding: 10px 16px;
-  background-color: #d4e2d4;
+  padding: 10px 10px;
+  background-color: #86E4AD;
   color: black;
-  font-family: "letscoffee";
   cursor: pointer;
+  border: 2px solid lightgray; 
+  border-radius: 10px; /* Set border radius to create round corners */
+  margin-top: "10px";
+  margin-bottom: "10px";
+  margin-right: "10px";
+  margin-left: "10px";
 }
+
+.message-button {
+  font-size: 18px;
+  font-family: 'Nunito Sans';
+  font-weight: bold;
+  padding: 5px 5px;
+  background-color: lightgray;
+  color:black;
+  cursor: pointer;
+  border: 2px solid lightgray; 
+  border-radius: 10px; /* Set border radius to create round corners */
+  margin-top: "5px";
+  margin-bottom: "5x";
+  margin-right: "5px";
+  margin-left: "5px";
+}
+
+
 
 /* Custom styles for the TokenInput.jex */
 .token-background-container {
@@ -133,21 +170,21 @@
 }
 
 .user-message {
-  font-family: "dadha";
-  background-color: lightgray;
-  color: black;
-  font-size: calc(16px + 2vmin);
-  padding: 10px;
-  margin-bottom: 10px;
+  font-family: 'Indie Flower';
+  font-weight: Medium;
+  color:#0b3e83;
+  font-size: calc(14px + 1vmin);
+  padding: 5px;
+  margin-bottom: 5px;
 }
 
 .assistant-message {
-  font-family: "ComingSoon";
-  background-color: lightgray;
-  color: gray;
-  font-size: calc(16px + 2vmin);
-  padding: 10px;
-  margin-bottom: 10px;
+  font-family: "Kalam";
+  font-weight: Medium;
+  color:#0b3e83;
+  font-size: calc(14px + 1vmin);
+  padding: 5px;
+  margin-bottom: 5px;
 }
 
 .system-message {
