@@ -17,7 +17,7 @@
 
 /* Basic styles */
 .h1-style {
-  font-family: 'Forum';
+  font-family: "Forum";
   display: flex;
   font-weight: regular;
   flex-direction: column;
@@ -27,13 +27,13 @@
   color: black;
 }
 .h2-style {
-  font-family: 'Forum';
+  font-family: "Forum";
   display: flex;
   font-weight: bold;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(38px + 2vmin);
+  font-size: calc(30px + 2vmin);
   color: black;
 }
 .centered-content {
@@ -46,7 +46,7 @@
 
 .interface-text {
   display: flex;
-  font-family: 'Nunito Sans';
+  font-family: "Nunito Sans";
   font-weight: bold;
   align-items: center;
   font-size: calc(14px + 1vmin);
@@ -54,39 +54,38 @@
 }
 
 .input-field {
-  font-family: 'Nunito Sans';
+  font-family: "Nunito Sans";
   font-weight: regular;
   font-size: calc(12px + 1vmin);
   width: 30%;
   padding: 5px;
-  border: 2px solid lightgray; 
+  border: 2px solid lightgray;
   border-radius: 10px; /* Set border radius to create round corners */
 }
 
 .input-textarea {
   /* Custom styles for the textarea */
-  font-family: 'Nunito Sans';
+  font-family: "Nunito Sans";
   font-weight: regular;
   font-size: calc(12px + 1vmin);
   height: 20vh;
   padding: 10px;
   width: 40vh;
-  border: 2px solid lightgray; 
+  border: 2px solid lightgray;
   resize: none; /* Prevent textarea from being resizable */
   border-radius: 10px; /* Set border radius to create round corners */
 }
 
-
 .button {
   /* Custom styles for the button */
   font-size: 20px;
-  font-family: 'Nunito Sans';
+  font-family: "Nunito Sans";
   font-weight: bold;
   padding: 10px 10px;
-  background-color: #86E4AD;
+  background-color: #86e4ad;
   color: black;
   cursor: pointer;
-  border: 2px solid lightgray; 
+  border: 2px solid lightgray;
   border-radius: 10px; /* Set border radius to create round corners */
   margin-top: 0rem;
   margin-bottom: 1rem;
@@ -122,6 +121,7 @@
 .custom-message-container {
   border: 2px solid lightgray;
   margin-bottom: 20px;
+  padding: 10px;
   /* height and width will be applied using the style attribute in JSX */
   /* padding: 10px; */
   overflow: auto;
@@ -130,30 +130,30 @@
   text-align: left;
   position: relative;
   border-radius: 10px; /* Set border radius to create round corners */
-  font-family: 'Nunito Sans';
+  font-family: "Nunito Sans";
   font-weight: regular;
   font-size: calc(12px + 1vmin);
 }
 
 .message-textarea {
-  font-family: 'Nunito Sans';
+  font-family: "Nunito Sans";
   font-weight: regular;
   font-size: calc(12px + 1vmin);
   height: 20vh;
   width: 99%;
+  position: relative;
 }
 
 .message-hintpost-button {
   font-size: calc(8px + 1vmin);
-  font-family: 'Nunito Sans';
+  font-family: "Nunito Sans";
   font-weight: bold;
   padding: 10px 10px;
   background-color: wheat;
-  color:black;
+  color: black;
   cursor: pointer;
-  border: 2px solid lightgray; 
+  border: 2px solid lightgray;
   border-radius: 10px; /* Set border radius to create round corners */
-  margin-top:5rem;
   margin-bottom: 0rem;
   margin-right: 2rem;
   margin-left: 2rem;
@@ -161,21 +161,19 @@
 
 .message-button {
   font-size: calc(6px + 1vmin);
-  font-family: 'Nunito Sans';
+  font-family: "Nunito Sans";
   font-weight: bold;
   padding: 3px 3px;
   background-color: lightgray;
-  color:black;
+  color: black;
   cursor: pointer;
-  border: 2px solid lightgray; 
+  border: 2px solid lightgray;
   border-radius: 10px; /* Set border radius to create round corners */
-  scroll-margin-top:  1rem;
+  scroll-margin-top: 1rem;
   margin-bottom: 1rem;
   margin-right: 1rem;
   margin-left: 1rem;
 }
-
-
 
 /* Custom styles for the TokenInput.jex */
 .token-background-container {
@@ -235,9 +233,9 @@
 }
 
 .user-message {
-  font-family: 'Indie Flower';
+  font-family: "Indie Flower";
   font-weight: Medium;
-  color:#0b3e83;
+  color: #0b3;
   font-size: calc(14px + 1vmin);
   padding: 5px;
   margin-bottom: 5px;
@@ -246,7 +244,7 @@
 .assistant-message {
   font-family: "Kalam";
   font-weight: Medium;
-  color:#0b3e83;
+  color: #0b3e83;
   font-size: calc(14px + 1vmin);
   padding: 5px;
   margin-bottom: 5px;

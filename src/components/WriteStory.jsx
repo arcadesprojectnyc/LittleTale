@@ -188,34 +188,52 @@ function WriteStory() {
 
   return (
     <div className="write-background-container">
-      <div style={{ marginBottom: "20px" }}>
-        <h2 className="h2-style" style={{ marginUpper: "30px"}}>Need to change</h2>
-        <div>
-          <button
-            className="button"
-            style={{ marginRight: "30px" }}
-            onClick={handleRewriteStrotyClick}
-            disabled={isLoading}
+      <div>
+        <div style={{ display: "flex" }}>
+          <div className="h2-style" style={{ width: "70%" }}>
+            Need to change
+          </div>
+          <div
+            style={{
+              marginTop: "5vh",
+              width: "35%",
+            }}
           >
-            {isLoading ? "Wait" : "Rewrite Story"}
-          </button>
-          <button 
-          className="button"
-          onClick={handleFinishStory} 
-          disabled={isLoading}
-          style={{ marginLeft: "30px" }}
-          >
-            {isLoading ? "Wait" : "Finish Story"}
-          </button>
+            <button
+              className="button"
+              style={{ marginRight: "30px" }}
+              onClick={handleRewriteStrotyClick}
+              disabled={isLoading}
+            >
+              {isLoading ? "Wait" : "Rewrite Story"}
+            </button>
+            <button
+              className="button"
+              onClick={handleFinishStory}
+              disabled={isLoading}
+              style={{ marginLeft: "30px" }}
+            >
+              {isLoading ? "Wait" : "Finish Story"}
+            </button>
+          </div>
         </div>
-
-        <MessagesContainer
-          messages={messages}
-          height="80vh"
-          autoScroll={autoScroll}
-          buttons={buttons}
-          editMessageIndex={editIndex}
-        />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <MessagesContainer
+            messages={messages}
+            height="85vh"
+            width="95vw"
+            autoScroll={autoScroll}
+            buttons={buttons}
+            editMessageIndex={editIndex}
+            isLoading={isLoading}
+          />
+        </div>
       </div>
       {hintMode && (
         <HintPopUp

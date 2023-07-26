@@ -78,12 +78,16 @@ const MessagesContainer = ({
   return (
     <div
       ref={containerRef}
-      className="message-textarea"
+      className="custom-message-container"
+      style={{
+        height: height,
+        width: width,
+      }}
     >
       {filteredMessages.map((message, index) => (
         <div
           key={index}
-          className={`message ${handleMessageRole(message.role)}`}
+          className={`${handleMessageRole(message.role)}`}
           style={{
             position: "relative",
             paddingBottom: buttons ? "30px" : "0",
@@ -101,10 +105,13 @@ const MessagesContainer = ({
             // Render the message content
             <div>{message.content}</div>
           )}
-          <p> </p>
           <div
-            className="button-container"
-            style={{ position: "absolute", bottom: "5px", right: "5px" }}
+            style={{
+              marginTop: "5px",
+              marginBottom: "5px",
+              position: "absolute",
+              right: "5px",
+            }}
           >
             {editMessageIndex == index &&
               buttons &&
