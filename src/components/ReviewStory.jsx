@@ -78,7 +78,7 @@ function ReviewStory() {
   };
 
   const saveToFile = () => {
-    const formattedMessages = JSON.stringify(messages, null, 2);
+    const formattedMessages = JSON.stringify(write_story_msgs, null, 2);
     const blob = new Blob([formattedMessages], {
       type: "application/json;charset=utf-8",
     });

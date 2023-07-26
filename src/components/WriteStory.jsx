@@ -18,6 +18,14 @@ function WriteStory() {
 
   const navigate = useNavigate();
 
+  // This is to avoid the double calling gpt api in dev mode, due to react new feature.
+  useEffect(() => {
+    if (messages.length == 2) {
+      let msgs = messages;
+      callGPTApi(msgs);
+    }
+  }, [messages]);
+
   useEffect(() => {
     if (write_story_msgs.length == 0) {
       let msgs = messages;
@@ -31,7 +39,6 @@ function WriteStory() {
       };
       msgs = [systemRoleMessage, userBeginMessage];
       setMessages(msgs);
-      callGPTApi(msgs);
     } else {
       const userEditMsg = {
         role: "user",
