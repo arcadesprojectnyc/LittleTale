@@ -181,31 +181,37 @@ function WriteStory() {
     },
     {
       role: "edit",
-      label: "AI Continue",
+      label: "Post",
       onClick: handleContinueStoryClick,
     },
   ];
 
   return (
-    <div>
+    <div className="write-background-container">
       <div style={{ marginBottom: "20px" }}>
-        <h3>Need to change</h3>
+        <h2 className="h2-style" style={{ marginUpper: "30px"}}>Need to change</h2>
         <div>
           <button
-            style={{ right: "10px" }}
+            className="button"
+            style={{ marginRight: "30px" }}
             onClick={handleRewriteStrotyClick}
             disabled={isLoading}
           >
             {isLoading ? "Wait" : "Rewrite Story"}
           </button>
-          <button onClick={handleFinishStory} disabled={isLoading}>
+          <button 
+          className="button"
+          onClick={handleFinishStory} 
+          disabled={isLoading}
+          style={{ marginLeft: "30px" }}
+          >
             {isLoading ? "Wait" : "Finish Story"}
           </button>
         </div>
 
         <MessagesContainer
           messages={messages}
-          height="85vh"
+          height="80vh"
           autoScroll={autoScroll}
           buttons={buttons}
           editMessageIndex={editIndex}

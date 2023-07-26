@@ -78,18 +78,7 @@ const MessagesContainer = ({
   return (
     <div
       ref={containerRef}
-      style={{
-        border: "1px solid #ccc",
-        marginBottom: "20px",
-        height: height,
-        width: width,
-        padding: "10px",
-        overflow: "auto",
-        wordWrap: "break-word",
-        whiteSpace: "pre-wrap",
-        textAlign: "left",
-        position: "relative",
-      }}
+      className="message-textarea"
     >
       {filteredMessages.map((message, index) => (
         <div
@@ -105,17 +94,14 @@ const MessagesContainer = ({
             // Render the input field with the message content
             <textarea
               value={editMessage}
-              style={{
-                height: "20vh",
-                width: "99%",
-              }}
+              className="message-textarea"
               onChange={handleEditOnChange}
             />
           ) : (
             // Render the message content
             <div>{message.content}</div>
           )}
-
+          <p> </p>
           <div
             className="button-container"
             style={{ position: "absolute", bottom: "5px", right: "5px" }}
@@ -129,6 +115,7 @@ const MessagesContainer = ({
                       key={buttonIndex}
                       onClick={() => button.onClick(editMessage)}
                       disabled={isLoading}
+                      className="message-hintpost-button" // Apply the "message-button" class here
                     >
                       {isLoading ? "Wait" : button.label}
                     </button>
@@ -143,6 +130,7 @@ const MessagesContainer = ({
                       key={buttonIndex}
                       onClick={() => button.onClick(index)}
                       disabled={isLoading}
+                      className="message-button" // Apply the "message-button" class here
                     >
                       {isLoading ? "Wait" : button.label}
                     </button>

@@ -28,10 +28,9 @@ function TokenInput() {
   return (
     <div className="token-background-container">
       <div className="centered-content">
-        <p className="interface-header">Little Tales</p>
+        <h1 className="h1-style">Little Tales</h1>
         <p className="interface-text">
-        Unlock your imagination with OpenAI's magical token!
-        </p>
+        Unlock your imagination with OpenAI's magical token!</p>
         <input
           type="text"
           value={token}
@@ -39,6 +38,7 @@ function TokenInput() {
           className="input-field"
         />
         <div>
+        <p></p>
         < button onClick={handleButtonClick} className="button">
           Let the adventure begin!
           </button>

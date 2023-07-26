@@ -40,7 +40,7 @@ function StorySetting() {
   return (
     <div className="setting-background-container">
       <div className="centered-content">
-        <p className="interface-header">What's in your mind?</p>
+        <h2 className="h2-style">What's in your mind?</h2>
         <p className="interface-text">Name your character:</p>
         <input
           type="text"
@@ -56,6 +56,7 @@ function StorySetting() {
           placeholder="Write the beginning of the Story..."
         ></textarea>
         <div>
+        <p></p>
           <button onClick={handleButtonClick} className="button">
             I'm ready!
           </button>
