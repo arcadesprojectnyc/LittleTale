@@ -200,20 +200,20 @@ function WriteStory() {
             }}
           >
             <button
-              className="button"
+              className={`button ${isLoading ? 'button-disabled' : ''}`}
               style={{ marginRight: "30px" }}
               onClick={handleRewriteStrotyClick}
               disabled={isLoading}
             >
-              {isLoading ? "Wait" : "Rewrite Story"}
+              {isLoading ? "Loading" : "Rewrite Story"}
             </button>
             <button
-              className="button"
+              className={`button ${isLoading ? 'button-disabled' : ''}`}
               onClick={handleFinishStory}
               disabled={isLoading}
               style={{ marginLeft: "30px" }}
             >
-              {isLoading ? "Wait" : "Finish Story"}
+              {isLoading ? "Loading" : "Finish Story"}
             </button>
           </div>
         </div>

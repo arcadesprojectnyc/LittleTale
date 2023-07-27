@@ -93,6 +93,16 @@
   margin-left: 1rem;
 }
 
+/* Additional class for the greyed-out button when isLoading is true */
+.button-disabled {
+  background-color: lightgrey;
+  cursor: not-allowed;
+  font-size: 20px;
+  font-family: "Nunito Sans";
+  font-weight: regular;
+  color: white;
+}
+
 /* Custom styles for the WriteStory.jex */
 
 .write-background-container {
