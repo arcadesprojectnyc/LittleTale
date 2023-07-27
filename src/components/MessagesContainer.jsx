@@ -90,7 +90,7 @@ const MessagesContainer = ({
           className={`${handleMessageRole(message.role)}`}
           style={{
             position: "relative",
-            paddingBottom: buttons ? "30px" : "0",
+            paddingBottom: buttons ? "40px" : "5px",
           }}
           ref={(el) => (messageRefs.current[index] = el)}
         >

@@ -169,18 +169,18 @@
 
 
 .message-button {
-  font-size: calc(4px + 1vmin);
+  font-size: calc(5px + 1vmin);
   font-family: "Nunito Sans";
   font-weight: bold;
-  padding: 3px 3px;
+  padding: 5px 5px;
   background-color: wheat;
   color: #202020;
   cursor: pointer;
   opacity: 0.9;
   border: 1px solid wheat;
-  border-radius: 10px; /* Set border radius to create round corners */
+  border-radius: 6px; /* Set border radius to create round corners */
   scroll-margin-top: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   margin-right: 1rem;
   margin-left: 2rem;
 }
@@ -248,11 +248,13 @@
   color:#202020;
   font-size: calc(15px + 1vmin);
   padding: 5px;
+  line-height: 1.7;
   margin-bottom: 5px;
 }
 
 .assistant-message {
   font-family: "Kalam";
+  line-height: 1.8;
   font-weight: regular;
   color: black;
   font-size: calc(15px + 1vmin);
