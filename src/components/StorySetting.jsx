@@ -40,7 +40,7 @@ function StorySetting() {
   return (
     <div className="setting-background-container">
       <div className="centered-content">
-        <h2 className="h2-style">What's in your mind?</h2>
+        <h2 className="h2-style">What's the opening line of your little tale?</h2>
         <p className="interface-text">Name your character:</p>
         <input
           type="text"

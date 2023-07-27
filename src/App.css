@@ -243,7 +243,7 @@
 
 .assistant-message {
   font-family: "Kalam";
-  font-weight: Medium;
+  font-weight: bold;
   color: #0b3e83;
   font-size: calc(14px + 1vmin);
   padding: 5px;
