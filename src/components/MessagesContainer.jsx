@@ -122,7 +122,7 @@ const MessagesContainer = ({
                       key={buttonIndex}
                       onClick={() => button.onClick(editMessage)}
                       disabled={isLoading}
-                      className={`message-hintpost-button ${isLoading ? 'message-hintpost-disabled' : ''}`}
+                      className={`message-hintpost-button ${isLoading ? 'button-disabled' : ''}`}
                     >
                       {isLoading ? "Loading" : button.label}
                     </button>
@@ -137,9 +137,9 @@ const MessagesContainer = ({
                       key={buttonIndex}
                       onClick={() => button.onClick(index)}
                       disabled={isLoading}
-                      className={`message-button ${isLoading ? 'message-button-disabled' : ''}`}
+                      className={`message-button ${isLoading ? 'button-disabled' : ''}`}
                     >
-                      {isLoading ? "Loading" : button.label}
+                      {isLoading ? button.label : button.label}
                     </button>
                   )
               )}

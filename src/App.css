@@ -95,12 +95,9 @@
 
 /* Additional class for the greyed-out button when isLoading is true */
 .button-disabled {
-  background-color: lightgrey;
   cursor: not-allowed;
-  font-size: 20px;
-  font-family: "Nunito Sans";
-  font-weight: regular;
-  color: white;
+  opacity: 0.4;
+  background-color: lightgray;
 }
 
 /* Custom styles for the WriteStory.jex */
@@ -160,24 +157,10 @@
   font-weight: bold;
   padding: 10px 10px;
   background-color: wheat;
+  opacity: 0.9;
   color: black;
   cursor: pointer;
   border: 2px solid lightgray;
-  border-radius: 10px; /* Set border radius to create round corners */
-  margin-bottom: 0rem;
-  margin-right: 2rem;
-  margin-left: 2rem;
-}
-
-.message-hintpost-disabled {
-  background-color: white;
-  border: white;
-  cursor: not-allowed;
-  font-size: calc(8px + 1vmin);
-  font-family: "Nunito Sans";
-  font-weight: bold;
-  padding: 10px 10px;
-  color: white;
   border-radius: 10px; /* Set border radius to create round corners */
   margin-bottom: 0rem;
   margin-right: 2rem;
@@ -193,22 +176,13 @@
   background-color: wheat;
   color: #202020;
   cursor: pointer;
+  opacity: 0.9;
   border: 1px solid wheat;
   border-radius: 10px; /* Set border radius to create round corners */
   scroll-margin-top: 0.5rem;
   margin-bottom: 1rem;
   margin-right: 1rem;
   margin-left: 2rem;
-}
-
-.message-button-disabled {
-  background-color: white;
-  cursor: not-allowed;
-  font-size: calc(6px + 1vmin);
-  border: 1px solid white;
-  font-family: "Nunito Sans";
-  font-weight: regular;
-  color: white;
 }
 
 /* Custom styles for the TokenInput.jex */
@@ -328,6 +302,35 @@
   font-family: "Nunito Sans";
   font-weight: medium;
   font-size: calc(15px + 1vmin);
+  color:#101010;
+  line-height: 1.5;
+}
+
+/* Custom styles for the HintPopUp.jex */
+.hint-popup-container {
+  position: absolute;
+  top: 30%;
+  left: 60%;
+  transform: translateX(-50%);
+  background: rgb(134, 228, 173, 0.8); /* Semi-transparent background color */
+  padding: 10px;
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); /* Box shadow for floating effect */
+  z-index: 1;
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  cursor: pointer;
+}
+
+.hint {
+  text-align: left;
+  font-family: "Nunito Sans";
+  font-weight: medium;
+  font-size: calc(12px + 1vmin);
   color:#101010;
   line-height: 1.5;
 }

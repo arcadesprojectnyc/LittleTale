@@ -204,7 +204,7 @@ function WriteStory() {
               onClick={handleRewriteStrotyClick}
               disabled={isLoading}
             >
-              {isLoading ? "Loading" : "Rewrite Story"}
+              {isLoading ? "Rewrite Story" : "Rewrite Story"}
             </button>
             <button
               className={`button ${isLoading ? 'button-disabled' : ''}`}
@@ -212,7 +212,7 @@ function WriteStory() {
               disabled={isLoading}
               style={{ marginLeft: "30px" }}
             >
-              {isLoading ? "Loading" : "Finish Story"}
+              {isLoading ? "Finish Story" : "Finish Story"}
             </button>
           </div>
         </div>

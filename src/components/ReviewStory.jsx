@@ -147,13 +147,13 @@ function ReviewStory() {
           onClick={saveToFile} 
           className={`button ${isLoading ? 'button-disabled' : ''}`}
           disabled={isLoading}>
-            {isLoading ? "Loading" : "Save Story"}
+            {isLoading ? "Save Story" : "Save Story"}
           </button>
           <button 
           onClick={handleStartWriting} 
           disabled={isLoading}
           className={`button ${isLoading ? 'button-disabled' : ''}`}>
-            {isLoading ? "Loading" : "Start Writing Again"}
+            {isLoading ? "Start Over": "Start Over"}
           </button>
         </div>
 
