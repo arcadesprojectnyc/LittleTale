@@ -169,6 +169,22 @@
   margin-left: 2rem;
 }
 
+.message-hintpost-disabled {
+  background-color: white;
+  border: white;
+  cursor: not-allowed;
+  font-size: calc(8px + 1vmin);
+  font-family: "Nunito Sans";
+  font-weight: bold;
+  padding: 10px 10px;
+  color: white;
+  border-radius: 10px; /* Set border radius to create round corners */
+  margin-bottom: 0rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
+}
+
+
 .message-button {
   font-size: calc(4px + 1vmin);
   font-family: "Nunito Sans";
