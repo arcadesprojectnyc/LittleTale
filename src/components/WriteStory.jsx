@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { handleAPIRequest } from "../utils/GPTUtils";
 import { UserContext } from "./UserContext";
 import MessagesContainer from "./MessagesContainer";
-import hint from "../images/hint.png";
 import HintPopUp from "./HintPopUp";
 
 function WriteStory() {
-  const { token, beginning, write_story_msgs, setWriteStoryMsgCxt } =
+  const { token, beginning, charactor_name,write_story_msgs, setWriteStoryMsgCxt } =
     useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [hintMode, setHintMode] = useState(false);
@@ -191,7 +190,7 @@ function WriteStory() {
       <div>
         <div style={{ display: "flex" }}>
           <div className="h2-style" style={{ width: "70%" }}>
-            Need to change
+          {`The Magical Adventures of ${charactor_name}`}
           </div>
           <div
             style={{

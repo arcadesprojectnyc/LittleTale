@@ -170,19 +170,29 @@
 }
 
 .message-button {
-  font-size: calc(6px + 1vmin);
+  font-size: calc(4px + 1vmin);
   font-family: "Nunito Sans";
   font-weight: bold;
-  padding: 3px 3px;
-  background-color: lightgray;
-  color: black;
+  padding: 4px 4px;
+  background-color: wheat;
+  color: grey;
   cursor: pointer;
-  border: 2px solid lightgray;
+  border: 1px solid wheat;
   border-radius: 10px; /* Set border radius to create round corners */
-  scroll-margin-top: 1rem;
+  scroll-margin-top: 1.5rem;
   margin-bottom: 1rem;
   margin-right: 1rem;
   margin-left: 1rem;
+}
+
+.message-button-disabled {
+  background-color: white;
+  cursor: not-allowed;
+  font-size: calc(6px + 1vmin);
+  border: 1px solid white;
+  font-family: "Nunito Sans";
+  font-weight: regular;
+  color: white;
 }
 
 /* Custom styles for the TokenInput.jex */
