@@ -130,6 +130,7 @@ function ReviewStory() {
   ];
 
   return (
+    <div className="review-background-container ">
     <div
       style={{
         width: "100vw",
@@ -139,14 +140,20 @@ function ReviewStory() {
         alignItems: "center",
       }}
     >
-      <div style={{ width: "95vw" }}>
-        <h3 style={{ fontFamily: "spilt-ink" }}>To Be Reviewed</h3>
+      <div style={{ width: "95vw", marginTop:"5vw"}}>
+        <h2 className="h2-style" >Title</h2>
         <div>
-          <button onClick={saveToFile} disabled={isLoading}>
-            {isLoading ? "Wait" : "Save Story"}
+          <button 
+          onClick={saveToFile} 
+          className={`button ${isLoading ? 'button-disabled' : ''}`}
+          disabled={isLoading}>
+            {isLoading ? "Loading" : "Save Story"}
           </button>
-          <button onClick={handleStartWriting} disabled={isLoading}>
-            {isLoading ? "Wait" : "Start Writing Again"}
+          <button 
+          onClick={handleStartWriting} 
+          disabled={isLoading}
+          className={`button ${isLoading ? 'button-disabled' : ''}`}>
+            {isLoading ? "Loading" : "Start Writing Again"}
           </button>
         </div>
 
@@ -169,6 +176,7 @@ function ReviewStory() {
           <CommentsContainer commentMessages={commentMessages} />
         </div>
       </div>
+    </div>
     </div>
   );
 }
