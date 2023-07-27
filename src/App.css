@@ -253,19 +253,19 @@
 }
 
 .user-message {
-  font-family: "Indie Flower";
-  font-weight: Medium;
-  color: #0b3;
-  font-size: calc(14px + 1vmin);
+  font-family: "Tillana";
+  font-weight: semi-bold;
+  color:#404040;
+  font-size: calc(15px + 1vmin);
   padding: 5px;
   margin-bottom: 5px;
 }
 
 .assistant-message {
   font-family: "Kalam";
-  font-weight: bold;
-  color: #0b3e83;
-  font-size: calc(14px + 1vmin);
+  font-weight: regular;
+  color: black;
+  font-size: calc(15px + 1vmin);
   padding: 5px;
   margin-bottom: 5px;
 }

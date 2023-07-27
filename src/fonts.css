@@ -1,15 +1,56 @@
+/* Load Tillana ExtraBold */
 @font-face {
-  font-family: "ComingSoon";
-  src: url("./fonts/ComingSoon.ttf") format("truetype");
-  /* font-weight, font-style, etc. can also be specified */
-  font-family: "letscoffee";
-  src: url("./fonts/LetsCoffee-Wy2K4.ttf") format("truetype");
-  /* font-weight, font-style, etc. can also be specified */
-  font-family: "SekteCinta";
-  src: url("./fonts/SekteCinta-8MAoZ.ttf") format("truetype");
-  font-family: "dadha";
-  src: url("./fonts/dadha.ttf") format("truetype");
-  font-family: "Tuwir-JRDeB";
-  src: url("./fonts/Tuwir-JRDeB.ttf") format("truetype");
-  
+  font-family: 'Tillana';
+  src: url('./fonts/Tillana/Tillana-ExtraBold.ttf') format('truetype');
+  font-weight: 800; /* ExtraBold */
+  font-style: bolder;
+}
+
+/* Load Tillana Regular */
+@font-face {
+  font-family: 'Tillana';
+  src: url('./fonts/Tillana/Tillana-Regular.ttf') format('truetype');
+  font-weight: 400; /* Regular */
+  font-style: regular;
+}
+
+/* Load Tillana Bold */
+@font-face {
+  font-family: 'Tillana';
+  src: url('./fonts/Tillana/Tillana-Bold.ttf') format('truetype');
+  font-weight: 700; /* Bold */
+  font-style: bold;
+}
+
+
+/* Load Tillana SemiBold */
+@font-face {
+  font-family: 'Tillana';
+  src: url('./fonts/Tillana/Tillana-SemiBold.ttf') format('truetype');
+  font-weight: 600; /* SemiBold */
+  font-style: medium;
+}
+
+/* Load Kalam Bold */
+@font-face {
+  font-family: 'Kalam';
+  src: url('./fonts/Kalam/Kalam-Bold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: bold;
+}
+
+/* Load Kalam Regular */
+@font-face {
+  font-family: 'Kalam';
+  src: url('./fonts/Kalam/Kalam-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: regular;
+}
+
+/* Load Kalam Light */
+@font-face {
+  font-family: 'Kalam';
+  src: url('./fonts/Kalam/Kalam-Light.ttf') format('truetype');
+  font-weight: 300; /* Light */
+  font-style: light;
 }
