@@ -80,18 +80,21 @@ function WriteStory() {
 
   // Prompt for Hints
   const hint_request =
-    "I've reached a point in the game where I'm unsure how to proceed with the story. Could you please provide 3 potential directions that I can take with some guiding questions to help me explore each option further?";
+    "I've reached a point in the game where I'm unsure how to proceed with the story. Please provide 2-3 potential directions that I can take with 1-2 guiding questions to help me explore each option further. Here are requirements:\n";
   const hint_hard_requirment =
-    "Remember to consider the story so far and make the questions engaging and thought-provoking.  To make it more engaging and thought-provoking, please continue to use a teacher's tone.";
+    "- Remember to consider the story so far and make the questions engaging and thought-provoking.\n";
   const hint_length_requirement =
-    "Keep your responses concise, using no more than 60 words each time.";
+    "- Keep the whole response concise, and the response must limit to 80 words overall.\n ";
+  const hint_format_requirement =
+    "- Kindly ensure that questions are presented in a single, coherent paragraph without breaking them into different lines.\n"
   const hint_beginning_requirement =
-    "Begin with 'Here are some hints to continue our story.'";
+    "- Begin with 'Here are some hints to continue our story.'";
 
   const hint_prompt =
     hint_request +
     hint_hard_requirment +
     hint_length_requirement +
+    hint_format_requirement +
     hint_beginning_requirement;
 
   const callGPTApi = async (msgs) => {
