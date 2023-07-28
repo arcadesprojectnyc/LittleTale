@@ -17,12 +17,17 @@ function WriteStory() {
 
   const navigate = useNavigate();
 
+  const setDefaultHint = () => {
+    setHintText(["Let me thinking for couple seconds..."]);
+  };
+
   // This is to avoid the double calling gpt api in dev mode, due to react new feature.
   useEffect(() => {
     if (messages && messages.length == 2) {
       let msgs = messages;
       callGPTApi(msgs);
     }
+    setDefaultHint();
   }, [messages]);
 
   useEffect(() => {
@@ -155,7 +160,7 @@ function WriteStory() {
 
   const handleClosePopup = () => {
     setHintMode(false);
-    setHintText([]);
+    setDefaultHint();
   };
 
   const handleDeleteMsg = (deleteIndex) => {

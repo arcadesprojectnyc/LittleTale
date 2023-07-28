@@ -315,8 +315,9 @@
 /* Custom styles for the HintPopUp.jex */
 .hint-popup-container {
   position: absolute;
-  top: 30%;
-  left: 60%;
+  top: 20%;
+  left: 50%;
+  width: 50%;
   transform: translateX(-50%);
   background: rgb(134, 228, 173, 0.95); /* Semi-transparent background color */
   padding: 10px;

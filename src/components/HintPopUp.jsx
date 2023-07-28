@@ -3,10 +3,7 @@ import React from "react";
 const HintPopUp = ({ hintText, handleClosePopup }) => {
   return (
     <div className="hint-popup-container">
-      <button
-        className="close-button" 
-        onClick={handleClosePopup}
-      >
+      <button className="close-button" onClick={handleClosePopup}>
         X
       </button>
       {hintText.map((message, index) => (
