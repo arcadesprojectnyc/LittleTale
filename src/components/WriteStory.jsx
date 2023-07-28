@@ -6,7 +6,7 @@ import MessagesContainer from "./MessagesContainer";
 import HintPopUp from "./HintPopUp";
 
 function WriteStory() {
-  const { token, beginning, charactor_name,write_story_msgs, setWriteStoryMsgCxt } =
+  const { token, beginning, title, write_story_msgs, setWriteStoryMsgCxt } =
     useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [hintMode, setHintMode] = useState(false);
@@ -19,7 +19,7 @@ function WriteStory() {
 
   // This is to avoid the double calling gpt api in dev mode, due to react new feature.
   useEffect(() => {
-    if (messages.length == 2) {
+    if (messages && messages.length == 2) {
       let msgs = messages;
       callGPTApi(msgs);
     }
@@ -187,52 +187,50 @@ function WriteStory() {
 
   return (
     <div className="write-background-container">
-      <div>
-        <div style={{ display: "flex" }}>
-          <div className="h2-style" style={{ width: "70%" }}>
-          {`The Magical Adventures of ${charactor_name}`}
-          </div>
-          <div
-            style={{
-              marginTop: "5vh",
-              width: "35%",
-            }}
-          >
-            <button
-              className={`button ${isLoading ? 'button-disabled' : ''}`}
-              style={{ marginRight: "30px" }}
-              onClick={handleRewriteStrotyClick}
-              disabled={isLoading}
-            >
-              {isLoading ? "Rewrite Story" : "Rewrite Story"}
-            </button>
-            <button
-              className={`button ${isLoading ? 'button-disabled' : ''}`}
-              onClick={handleFinishStory}
-              disabled={isLoading}
-              style={{ marginLeft: "30px" }}
-            >
-              {isLoading ? "Finish Story" : "Finish Story"}
-            </button>
-          </div>
+      <div style={{ display: "flex" }}>
+        <div className="h2-style" style={{ width: "70%" }}>
+          {`${title}`}
         </div>
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            marginTop: "5vh",
+            width: "35%",
           }}
         >
-          <MessagesContainer
-            messages={messages}
-            height="85vh"
-            width="95vw"
-            autoScroll={autoScroll}
-            buttons={buttons}
-            editMessageIndex={editIndex}
-            isLoading={isLoading}
-          />
+          <button
+            className={`button ${isLoading ? "button-disabled" : ""}`}
+            style={{ marginRight: "30px" }}
+            onClick={handleRewriteStrotyClick}
+            disabled={isLoading}
+          >
+            {isLoading ? "Rewrite Story" : "Rewrite Story"}
+          </button>
+          <button
+            className={`button ${isLoading ? "button-disabled" : ""}`}
+            onClick={handleFinishStory}
+            disabled={isLoading}
+            style={{ marginLeft: "30px" }}
+          >
+            {isLoading ? "Finish Story" : "Finish Story"}
+          </button>
         </div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <MessagesContainer
+          messages={messages}
+          height="85vh"
+          width="95vw"
+          autoScroll={autoScroll}
+          buttons={buttons}
+          editMessageIndex={editIndex}
+          isLoading={isLoading}
+        />
       </div>
       {hintMode && (
         <HintPopUp

@@ -6,7 +6,7 @@ export const UserContext = createContext();
 // Create a provider component
 export function UserProvider({ children }) {
   const [token, setToken] = useState(null);
-  const [char_name, setCharName] = useState(null);
+  const [title, setTitle] = useState(null);
   const [beginning, setBeginning] = useState(null);
   const [write_story_msgs, setWriteStoryMsgs] = useState(null);
 
@@ -14,8 +14,8 @@ export function UserProvider({ children }) {
     setToken(token);
   };
 
-  const setCharNameValue = (char_name) => {
-    setCharName(char_name);
+  const setTitleValue = (title) => {
+    setTitle(title);
   };
 
   const setBeginningValue = (beginning) => {
@@ -30,8 +30,8 @@ export function UserProvider({ children }) {
   const value = {
     token,
     setTokenCxt: setTokenValue,
-    char_name,
-    setCharNameCxt: setCharNameValue,
+    title,
+    setTitleCxt: setTitleValue,
     beginning,
     setBeginningCxt: setBeginningValue,
     write_story_msgs,

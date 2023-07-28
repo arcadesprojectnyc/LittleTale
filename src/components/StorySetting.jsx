@@ -3,30 +3,25 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "./UserContext";
 
 function StorySetting() {
-  const [charactor_name, setCharactorName] = useState("");
+  const [title, setTitle] = useState("");
   const [beginning, setBeginning] = useState("");
   const navigate = useNavigate();
-  const { setCharNameCxt, setBeginningCxt, setWriteStoryMsgCxt } =
+  const { setTitleCxt, setBeginningCxt, setWriteStoryMsgCxt } =
     useContext(UserContext);
 
-  const handleCharactorNameChange = (event) => {
-    setCharactorName(event.target.value);
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
   };
 
   const handleBeginningChange = (event) => {
     setBeginning(event.target.value);
   };
   const handleButtonClick = () => {
-    if (charactor_name == "" || beginning == "") {
-      console.log(
-        "[Select.log] char_name: " +
-          charactor_name +
-          ", beginning: " +
-          beginning
-      );
-      alert(`Let's write the charactor name and the beginning!`);
+    if (title == "" || beginning == "") {
+      console.log("[Select.log] Title: " + title + ", beginning: " + beginning);
+      alert(`Let's write the story title and the beginning!`);
     } else {
-      setCharNameCxt(charactor_name);
+      setTitleCxt(title);
       setBeginningCxt(beginning);
       let path = "/write-story/";
       navigate(path);
@@ -40,15 +35,17 @@ function StorySetting() {
   return (
     <div className="setting-background-container">
       <div className="centered-content">
-        <h2 className="h2-style">What's the opening line of your little tale?</h2>
-        <p className="interface-text">Name your character:</p>
+        <h2 className="h2-style">
+          What's the opening line of your little tale?
+        </h2>
+        <p className="interface-text">Story Title</p>
         <input
           type="text"
-          value={charactor_name}
-          onChange={handleCharactorNameChange}
+          value={title}
+          onChange={handleTitleChange}
           className="input-field"
         />
-        <p className="interface-text">Write the beginning of the Story:</p>
+        <p className="interface-text">Beginning of the Story</p>
         <textarea
           className="input-textarea"
           value={beginning}
@@ -56,7 +53,7 @@ function StorySetting() {
           placeholder="Write the beginning of the Story..."
         ></textarea>
         <div>
-        <p></p>
+          <p></p>
           <button onClick={handleButtonClick} className="button">
             I'm ready!
           </button>

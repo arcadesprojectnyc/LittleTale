@@ -93,13 +93,6 @@
   margin-left: 1rem;
 }
 
-/* Additional class for the greyed-out button when isLoading is true */
-.button-disabled {
-  cursor: not-allowed;
-  opacity: 0.4;
-  background-color: lightgray;
-}
-
 /* Custom styles for the WriteStory.jex */
 
 .write-background-container {
@@ -167,7 +160,6 @@
   margin-left: 2rem;
 }
 
-
 .message-button {
   font-size: calc(5px + 1vmin);
   font-family: "Nunito Sans";
@@ -178,11 +170,18 @@
   cursor: pointer;
   opacity: 0.9;
   border: 1px solid wheat;
-  border-radius: 6px; /* Set border radius to create round corners */
+  border-radius: 6px;
   scroll-margin-top: 0.5rem;
   margin-bottom: 2rem;
   margin-right: 1rem;
   margin-left: 2rem;
+}
+
+/* Additional class for the greyed-out button when isLoading is true */
+.button-disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+  background-color: lightgray;
 }
 
 /* Custom styles for the TokenInput.jex */
@@ -245,7 +244,7 @@
 .user-message {
   font-family: "Tillana";
   font-weight: semi-bold;
-  color:#202020;
+  color: #202020;
   font-size: calc(15px + 1vmin);
   padding: 5px;
   line-height: 1.7;
@@ -296,7 +295,12 @@
   width: 30vw;
   justify-content: space-between;
   padding: 10px;
-  background-color: rgba(253, 245, 230, 0.6); /* Use rgba notation with alpha value for background color */
+  background-color: rgba(
+    253,
+    245,
+    230,
+    0.6
+  ); /* Use rgba notation with alpha value for background color */
 }
 
 .comment {
@@ -304,7 +308,7 @@
   font-family: "Nunito Sans";
   font-weight: medium;
   font-size: calc(15px + 1vmin);
-  color:#101010;
+  color: #101010;
   line-height: 1.5;
 }
 
@@ -314,7 +318,7 @@
   top: 30%;
   left: 60%;
   transform: translateX(-50%);
-  background: rgb(134, 228, 173, 0.8); /* Semi-transparent background color */
+  background: rgb(134, 228, 173, 0.95); /* Semi-transparent background color */
   padding: 10px;
   border-radius: 20px; /* Rounded corners */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); /* Box shadow for floating effect */
@@ -333,6 +337,6 @@
   font-family: "Nunito Sans";
   font-weight: medium;
   font-size: calc(12px + 1vmin);
-  color:#101010;
+  color: #101010;
   line-height: 1.5;
 }

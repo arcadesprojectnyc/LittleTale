@@ -9,7 +9,7 @@ import CommentsContainer from "./CommentsContainer";
 // the write_story_msgs to be the whole story line and sotry display.
 // the messages in this reviewStory is only for gpt review conversation.
 function ReviewStory() {
-  const { token, write_story_msgs, setWriteStoryMsgCxt } =
+  const { token, title, write_story_msgs, setWriteStoryMsgCxt } =
     useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [reviewMessageIndex, setReviewMessageIndex] = useState(null);
@@ -130,37 +130,48 @@ function ReviewStory() {
   ];
 
   return (
-    <div className="review-background-container ">
-    <div
-      style={{
-        width: "100vw",
-        height: "98vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <div style={{ width: "95vw", marginTop:"5vw"}}>
-        <h2 className="h2-style" >Title</h2>
-        <div>
-          <button 
-          onClick={saveToFile} 
-          className={`button ${isLoading ? 'button-disabled' : ''}`}
-          disabled={isLoading}>
+    <div className="review-background-container">
+      <div style={{ display: "flex" }}>
+        <div className="h2-style" style={{ width: "70%" }}>
+          {`${title}`}
+        </div>
+        <div
+          style={{
+            marginTop: "5vh",
+            width: "35%",
+          }}
+        >
+          <button
+            onClick={saveToFile}
+            className={`button ${isLoading ? "button-disabled" : ""}`}
+            disabled={isLoading}
+          >
             {isLoading ? "Save Story" : "Save Story"}
           </button>
-          <button 
-          onClick={handleStartWriting} 
-          disabled={isLoading}
-          className={`button ${isLoading ? 'button-disabled' : ''}`}>
-            {isLoading ? "Start Over": "Start Over"}
+          <button
+            onClick={handleStartWriting}
+            disabled={isLoading}
+            className={`button ${isLoading ? "button-disabled" : ""}`}
+          >
+            {isLoading ? "Start Over" : "Start Over"}
           </button>
         </div>
-
+      </div>
+      <div
+        style={{
+          width: "100vw",
+          height: "85vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <div
           style={{
             display: "flex",
-            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "95%",
           }}
         >
           <MessagesContainer
@@ -176,7 +187,6 @@ function ReviewStory() {
           <CommentsContainer commentMessages={commentMessages} />
         </div>
       </div>
-    </div>
     </div>
   );
 }
