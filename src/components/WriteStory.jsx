@@ -18,7 +18,7 @@ function WriteStory() {
   const navigate = useNavigate();
 
   const setDefaultHint = () => {
-    setHintText(["Let me thinking for couple seconds..."]);
+    setHintText(["Let me think for couple seconds..."]);
   };
 
   // This is to avoid the double calling gpt api in dev mode, due to react new feature.
@@ -86,7 +86,7 @@ function WriteStory() {
   const hint_length_requirement =
     "- Keep the whole response concise, and the response must limit to 80 words overall.\n ";
   const hint_format_requirement =
-    "- Kindly ensure that questions are presented in a single, coherent paragraph without breaking them into different lines.\n"
+    "- Kindly ensure that questions are presented in a single, coherent paragraph without breaking them into different lines.\n";
   const hint_beginning_requirement =
     "- Begin with 'Here are some hints to continue our story.'";
 
