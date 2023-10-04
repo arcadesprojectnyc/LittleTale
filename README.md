@@ -1,17 +1,18 @@
-# Getting Started with Create React App
+# Getting Started 
 
+For download and using this app, please read: [Disclaimer](./DISCLAIMER).
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Docker Support
 
 1. Build docker image
-   `docker build -f Dockerfile -t childrensbook .`
+   `docker build -f Dockerfile -t littletale .`
 
 2. Run container and start app
-   `docker run -it -v ChildrensBook:/app -w /app -p 4000:3000 childrensbook`
+   `docker run -it -v littletale:/app -w /app -p 4000:3000 littletale`
 
    If you haven't run this locally before, then try the following command before running docker for the first time: 
-   `docker run -it -v ChildrensBook:/app -w /app -p 4000:3000 childrensbook npm install`
+   `docker run -it -v littletale:/app -w /app -p 4000:3000 littletale npm install`
 
 
 3. Access to browser and test
